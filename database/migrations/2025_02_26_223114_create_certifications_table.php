@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('certifications', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
-            $table->string('institution_name');
+            $table->string('institution_name', 180);
             $table->date('issued_date');
             $table->date('expiration_date')->nullable();
             $table->string('credential_id', 255)->nullable();
