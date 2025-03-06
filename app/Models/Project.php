@@ -20,6 +20,10 @@ class Project extends Model
         'status'
     ];
 
+    protected $with = [
+        'tags:id,name'
+    ];
+
     protected function casts(): array {
         return [
             'status' => ProjectStatus::class,

@@ -15,6 +15,10 @@ class Tag extends Model
         'name'
     ];
 
+    protected $hidden = [
+        'pivot'
+    ];
+
     public function projects(): BelongsToMany {
         return $this->belongsToMany(Project::class)
                     ->using(ProjectTag::class);
