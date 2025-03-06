@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\NotFoundHttpException;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
+use ReflectionClass;
 
 abstract class Controller
 {
@@ -63,6 +65,17 @@ abstract class Controller
         
         $data = $this->model::create($requestData);
 
+        $relations = $this->getModelBelongsToManyRelations();
+
+        foreach ($relations as $relation) {
+            if (!isset($requestData[$relation])) {
+                continue;
+            }
+
+            $ids = collect($requestData[$relation])->pluck('id')->all();
+            $data->{$relation}()->sync($ids);
+        }
+
         return response()->json($data, 201);
     }
 
@@ -75,6 +88,17 @@ abstract class Controller
 
         $requestData = $this->validateRequest($request);
         $data->update($requestData);
+
+        $relations = $this->getModelBelongsToManyRelations();
+
+        foreach ($relations as $relation) {
+            if (!isset($requestData[$relation])) {
+                continue;
+            }
+
+            $ids = collect($requestData[$relation])->pluck('id')->all();
+            $data->{$relation}()->sync($ids);
+        }
 
         return response()->json($data, 200);
     }
@@ -136,5 +160,31 @@ abstract class Controller
         }
 
         return $data;
+    }
+
+    protected function getModelBelongsToManyRelations(): array {
+        $relations = [];
+
+        $reflection = new ReflectionClass($this->model);
+
+        foreach ($reflection->getMethods() as $method) {
+            if ($method->class != get_class($this->model) || !$method->isPublic() || $method->isStatic()) {
+                continue;
+            }
+
+            $returnType = $method->getReturnType();
+                
+            if (!$returnType || !$returnType instanceof \ReflectionNamedType) {
+                continue;
+            }
+
+            if ($returnType->getName() != BelongsToMany::class) {
+                continue;
+            }
+
+            $relations[] = $method->getName();
+        }
+
+        return $relations;
     }
 }
