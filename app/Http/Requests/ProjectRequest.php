@@ -28,7 +28,9 @@ class ProjectRequest extends FormRequest
             'description' => 'required|string|max:4096',
             'completion_date' => 'date|nullable',
             'thumbnail_url' => 'required|url:http,https',
-            'status' => ['required', Rule::enum(ProjectStatus::class)]
+            'status' => ['required', Rule::enum(ProjectStatus::class)],
+            'tags' => 'array',
+            'tags.*.id' => 'required|integer|min:1'
         ];
     }
 }
