@@ -10,6 +10,8 @@ class Education extends Model
     /** @use HasFactory<\Database\Factories\EducationFactory> */
     use HasFactory;
 
+    protected $table = 'educations';
+
     protected $fillable = [
         'institution_name',
         'degree',
