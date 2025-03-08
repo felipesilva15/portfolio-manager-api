@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class NotFoundHttpException extends HttpException
 {
-    public function __construct(string $message = 'Registro não encontrado.', \Throwable $previous = null, int $code = 0, array $headers = []) {
+    public function __construct(string $message = 'Registro não encontrado.', \Throwable $previous = null, int $code = 404, array $headers = []) {
         parent::__construct(404, $message, $previous, $headers, $code);
     }
 
