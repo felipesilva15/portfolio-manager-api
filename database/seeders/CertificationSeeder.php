@@ -12,7 +12,7 @@ class CertificationSeeder extends Seeder
      */
     public function run(): void
     {
-        Certification::factory(1)
+        Certification::factory(2)
                         ->create();
     }
 }
