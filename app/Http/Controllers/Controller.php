@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\NotFoundHttpException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;
 use ReflectionClass;
@@ -65,16 +66,7 @@ abstract class Controller
         
         $data = $this->model::create($requestData);
 
-        $relations = $this->getModelBelongsToManyRelations();
-
-        foreach ($relations as $relation) {
-            if (!isset($requestData[$relation])) {
-                continue;
-            }
-
-            $ids = collect($requestData[$relation])->pluck('id')->all();
-            $data->{$relation}()->sync($ids);
-        }
+        $this->syncBelongToManyRelations($requestData, $data);
 
         return response()->json($data, 201);
     }
@@ -89,16 +81,7 @@ abstract class Controller
         $requestData = $this->validateRequest($request);
         $data->update($requestData);
 
-        $relations = $this->getModelBelongsToManyRelations();
-
-        foreach ($relations as $relation) {
-            if (!isset($requestData[$relation])) {
-                continue;
-            }
-
-            $ids = collect($requestData[$relation])->pluck('id')->all();
-            $data->{$relation}()->sync($ids);
-        }
+        $this->syncBelongToManyRelations($requestData, $data);
 
         return response()->json($data, 200);
     }
@@ -186,5 +169,22 @@ abstract class Controller
         }
 
         return $relations;
+    }
+
+    protected function syncBelongToManyRelations(mixed $request, Model $model): void {
+        $relations = $this->getModelBelongsToManyRelations();
+
+        foreach ($relations as $relation) {
+            $this->syncSingleBelongToManyRelation($relation, $request, $model);
+        }
+    }
+
+    protected function syncSingleBelongToManyRelation(string $relation, mixed $request, Model $model): void {
+        if (!isset($request[$relation])) {
+            return;
+        }
+
+        $ids = collect($request[$relation])->pluck('id')->all();
+        $model->{$relation}()->sync($ids);
     }
 }
