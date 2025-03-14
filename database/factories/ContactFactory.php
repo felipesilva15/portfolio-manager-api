@@ -18,8 +18,8 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->email(),
+            'name' => fake()->firstName(),
+            'email' => fake()->companyEmail(),
             'subject' => fake()->word(),
             'message' => fake()->text(rand(50, 300)),
             'status' => ContactStatus::Pending
