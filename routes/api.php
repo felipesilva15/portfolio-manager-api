@@ -8,6 +8,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -23,4 +24,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('certification', CertificationController::class);
     Route::apiResource('contact', ContactController::class);
     Route::apiResource('skill', SkillController::class);
+    Route::get('user', [UserController::class, 'index']);
 });
