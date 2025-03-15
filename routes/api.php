@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('user', [UserController::class, 'store']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -24,5 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('certification', CertificationController::class);
     Route::apiResource('contact', ContactController::class);
     Route::apiResource('skill', SkillController::class);
+
     Route::get('user', [UserController::class, 'index']);
+    Route::get('user/{id}', [UserController::class, 'show']);
+    Route::put('user/{id}', [UserController::class, 'update']);
+    Route::delete('user/{id}', [UserController::class, 'destroy']);
 });

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class UserController extends Controller
+class UserController
 {
     protected UserService $userService;
 
@@ -15,7 +18,27 @@ class UserController extends Controller
     }
 
     public function index(): JsonResponse {
-        $data = $this->userService->getAll();
-        return response()->json($data, 200);
+        $users = $this->userService->getAll();
+        return response()->json($users, 200);
+    }
+
+    public function show($id): JsonResponse {
+        $user = $this->userService->getById($id);
+        return response()->json($user, 200);
+    }
+    
+    public function store(StoreUserRequest $request): JsonResponse {
+        $user = $this->userService->create($request->validated());
+        return response()->json($user, 201);
+    }
+
+    public function update(UpdateUserRequest $request, int $id): JsonResponse {
+        $user = $this->userService->update($id, $request->validated());
+        return response()->json($user, 200);
+    }
+
+    public function destroy(int $id): Response {
+        $this->userService->deleteById($id);
+        return response()->noContent();
     }
 }
