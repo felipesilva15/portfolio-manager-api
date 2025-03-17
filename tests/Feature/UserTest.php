@@ -3,19 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
-
     public function test_can_list_users(): void
     {
-        $user = User::factory()->makeOne();
-        $user->save();
-
-        $response = $this->actingAs($user)->getJson('/api/user');
+        $response = $this->getJson('/api/user', $this->getAuthHeaders());
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -32,10 +26,9 @@ class UserTest extends TestCase
 
     public function test_can_get_user_by_id(): void
     {
-        $user = User::factory()->makeOne();
-        $user->save();
+        $user = User::factory()->createOne();
 
-        $response = $this->actingAs($user)->getJson('/api/user/'.$user->id);
+        $response = $this->getJson('/api/user/'.$user->id,  $this->getAuthHeaders());
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -52,7 +45,7 @@ class UserTest extends TestCase
     public function test_can_create_user(): void
     {
         $user = User::factory()->makeOne();
-        
+
         $data = $user->toArray();
         $data['password'] = '123';
 
@@ -72,14 +65,13 @@ class UserTest extends TestCase
 
     public function test_can_update_user(): void
     {
-        $user = User::factory()->makeOne();
-        $user->save();
-
+        $user = User::factory()->createOne();
+        
         $data = $user->toArray();
         $data['password'] = '123';
         $data['name'] = 'New name';
 
-        $response = $this->actingAs($user)->putJson('/api/user/'.$user->id, $data);
+        $response = $this->putJson('/api/user/'.$user->id, $data,  $this->getAuthHeaders());
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -95,10 +87,9 @@ class UserTest extends TestCase
 
     public function test_can_delete_user_by_id(): void
     {
-        $user = User::factory()->makeOne();
-        $user->save();
+        $user = User::factory()->createOne();
 
-        $response = $this->actingAs($user)->delete('/api/user/'.$user->id);
+        $response = $this->deleteJson('/api/user/'.$user->id, [],  $this->getAuthHeaders());
 
         $response->assertNoContent();
     }
