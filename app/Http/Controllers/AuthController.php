@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidCredentialException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -22,11 +23,11 @@ class AuthController extends Controller
     }
     
     public function me() {
-        return response()->json(auth()->user(), 200);
+        return response()->json(Auth::user(), 200);
     }
     
     public function logout() {
-        auth()->logout();
+        Auth::logout();
     
         return response()->json([
             'message' => 'Successful Logout!'
@@ -34,14 +35,14 @@ class AuthController extends Controller
     }
     
     public function refresh() {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(Auth::refresh());
     }
     
     protected function respondWithToken($token) {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 60
         ], 200);
     }
 }
