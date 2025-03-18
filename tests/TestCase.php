@@ -21,14 +21,8 @@ abstract class TestCase extends BaseTestCase
     }
 
     protected function generateAndSetAuthData(): void {
-        $user = User::factory()->create();
-        $credentials = [
-            'email' => $user->email,
-            'password' => "123",
-        ];
-
-        $this->authToken = JWTAuth::attempt($credentials);
-        $this->authUser = $user;
+        $this->authUser = User::factory()->create();
+        $this->authToken = JWTAuth::fromUser($this->authUser);
     }
 
     protected function getAuthHeaders() : array {
