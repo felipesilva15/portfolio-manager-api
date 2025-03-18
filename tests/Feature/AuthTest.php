@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthTest extends TestCase
 {
@@ -102,5 +104,53 @@ class AuthTest extends TestCase
                 ->assertJsonStructure([
                     'message'
                 ]);
+    }
+
+    public function test_expired_token_fails(): void
+    {
+        $user = User::factory()->createOne();
+        $data = [
+            'email' => $user->email,
+            'password' => "123",
+        ];
+
+        $response = $this->postJson('/api/login', $data);
+        $expiresIn = $response->json('expires_in');
+        $token = $response->json('access_token');
+
+        $this->travel($expiresIn)->minutes();
+
+        Auth::forgetUser();
+
+        $response = $this->getJson('/api/me', [
+            "Authorization" => "Bearer ".$token
+        ]);
+
+        $response->assertStatus(401)
+                ->assertJsonIsObject()
+                ->assertJsonStructure([
+                    'message'
+                ]);
+    }
+
+    public function test_can_use_valid_token_successful(): void
+    {
+        $user = User::factory()->createOne();
+        $data = [
+            'email' => $user->email,
+            'password' => "123",
+        ];
+
+        $response = $this->postJson('/api/login', $data);
+        $token = $response->json('access_token');
+
+        Auth::forgetUser();
+
+        $response = $this->getJson('/api/me', [
+            "Authorization" => "Bearer ".$token
+        ]);
+
+        $response->assertStatus(200)
+                ->assertJsonIsObject();
     }
 }
