@@ -42,6 +42,18 @@ class UserTest extends TestCase
             ->assertJsonFragment(['name' => $user->name]);
     }
 
+    public function test_cannot_get_user_by_invalid_id(): void
+    {
+        $response = $this->getJson('/api/user/999999',  $this->getAuthHeaders());
+
+        $response->assertNotFound()
+                    ->assertJsonStructure([
+                        'path',
+                        'code',
+                        'message'
+                    ]);
+    }
+
     public function test_can_create_user(): void
     {
         $user = User::factory()->makeOne();
@@ -85,6 +97,24 @@ class UserTest extends TestCase
             ->assertJsonFragment(['name' => 'New name']);
     }
 
+    public function test_cannot_update_user_with_invalid_id(): void
+    {
+        $user = User::factory()->createOne();
+        
+        $data = $user->toArray();
+        $data['password'] = '123';
+        $data['name'] = 'New name';
+
+        $response = $this->putJson('/api/user/999999', $data,  $this->getAuthHeaders());
+
+        $response->assertNotFound()
+                    ->assertJsonStructure([
+                        'path',
+                        'code',
+                        'message'
+                    ]);
+    }
+
     public function test_can_delete_user_by_id(): void
     {
         $user = User::factory()->createOne();
@@ -92,5 +122,19 @@ class UserTest extends TestCase
         $response = $this->deleteJson('/api/user/'.$user->id, [],  $this->getAuthHeaders());
 
         $response->assertNoContent();
+    }
+
+    public function test_cannot_delete_user_by_invalid_id(): void
+    {
+        $user = User::factory()->createOne();
+
+        $response = $this->deleteJson('/api/user/999999', [],  $this->getAuthHeaders());
+
+        $response->assertNotFound()
+                    ->assertJsonStructure([
+                        'path',
+                        'code',
+                        'message'
+                    ]);
     }
 }
