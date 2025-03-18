@@ -88,4 +88,19 @@ class AuthTest extends TestCase
                     'email' => $this->authUser->email,
                 ]);
     }
+
+    public function test_invalid_token_fails(): void
+    {
+        $headers = [
+            'Authorization' => 'Bearer invalid_token'
+        ];
+
+        $response = $this->getJson('/api/me', $headers);
+
+        $response->assertStatus(401)
+                ->assertJsonIsObject()
+                ->assertJsonStructure([
+                    'message'
+                ]);
+    }
 }
