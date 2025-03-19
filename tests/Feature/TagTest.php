@@ -127,4 +127,31 @@ class TagTest extends TestCase
                         'message'
                     ]);
     }
+
+    public function test_can_get_projects_by_tag_id(): void
+    {
+        $tag = Tag::factory()->createOne();
+
+        $response = $this->getJson('/api/tag/'.$tag->id.'/projects',  $this->getAuthHeaders());
+
+        $response->assertStatus(200)
+                    ->assertJsonStructure([
+                        '*' => [
+                            'id',
+                            'title',
+                            'description',
+                            'completion_date',
+                            'thumbnail_url',
+                            'status',
+                            'tags' => [
+                                '*' => [
+                                    'id',
+                                    'name'
+                                ]
+                            ],
+                            'updated_at',
+                            'created_at'
+                        ]
+                    ]);
+    }
 }
