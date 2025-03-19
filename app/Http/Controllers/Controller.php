@@ -186,5 +186,6 @@ abstract class Controller
 
         $ids = collect($request[$relation])->pluck('id')->all();
         $model->{$relation}()->sync($ids);
+        $model->load($relation);
     }
 }
