@@ -11,4 +11,8 @@ class TagController extends Controller
         $this->model = $model;
         $this->request = $request;
     }
+
+    public function projects(Tag $tag) {
+        return response()->json($tag->projects, 200);
+    }
 }
