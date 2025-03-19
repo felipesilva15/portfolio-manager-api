@@ -18,7 +18,7 @@ class SkillFactory extends Factory
     {
         return [
             'title' => fake()->languageCode(),
-            'thumbnail_url' => fake()->imageUrl()
+            'icon_url' => fake()->imageUrl()
         ];
     }
 }
