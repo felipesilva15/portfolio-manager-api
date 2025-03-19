@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::apiResource('project', ProjectController::class);
     Route::apiResource('tag', TagController::class);
+    Route::get('tag/{tag}/projects', [TagController::class, 'projects']);
     Route::apiResource('experience', ExperienceController::class);
     Route::apiResource('education', EducationController::class);
     Route::apiResource('certification', CertificationController::class);
