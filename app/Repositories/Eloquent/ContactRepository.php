@@ -15,4 +15,32 @@ class ContactRepository implements ContactRepositoryInterface {
     public function getById(int $id): ?Contact {
         return Contact::find($id);
     }
+
+    public function create(array $data): Contact {
+        return Contact::create($data);
+    }
+
+    public function update(int $id, array $data): ?Contact {
+        $contact = $this->getById($id);
+
+        if (!$contact) {
+            return null;
+        }
+
+        $contact->update($data);
+
+        return $contact;
+    }
+
+    public function deleteById(int $id): bool {
+        $contact = $this->getById($id);
+
+        if (!$contact) {
+            return false;
+        }
+
+        $contact->delete();
+
+        return true;
+    }
 }

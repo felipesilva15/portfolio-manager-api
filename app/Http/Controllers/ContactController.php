@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
+use App\Http\Requests\Contact\StoreContactRequest;
+use App\Http\Requests\Contact\UpdateContactRequest;
 use App\Services\ContactService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class ContactController extends Controller
+class ContactController
 {
     protected ContactService $contactService;
 
-    public function __construct(Request $request, Contact $model, ContactService $contactService) {
-        $this->model = $model;
-        $this->request = $request;
+    public function __construct(ContactService $contactService) {
         $this->contactService = $contactService;
     }
 
@@ -25,5 +24,20 @@ class ContactController extends Controller
     public function show($id): JsonResponse {
         $contact = $this->contactService->getById($id);
         return response()->json($contact, 200);
+    }
+
+    public function store(StoreContactRequest $request): JsonResponse {
+        $contact = $this->contactService->create($request->all());
+        return response()->json($contact, 201);
+    }
+
+    public function update(int $id, UpdateContactRequest $request): JsonResponse {
+        $contact = $this->contactService->update($id, $request->all());
+        return response()->json($contact, 200);
+    }
+
+    public function destroy(int $id): Response {
+        $this->contactService->deleteById($id);
+        return response()->noContent();
     }
 }

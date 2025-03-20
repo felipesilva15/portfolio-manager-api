@@ -37,7 +37,7 @@ class UserRepository implements UserRepositoryInterface {
             return false;
         }
 
-        User::destroy($id);
+        $user->delete($id);
 
         return true;
     }

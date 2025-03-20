@@ -27,4 +27,26 @@ class ContactService {
 
         return $contact;
     }
+
+    public function create(array $data): Contact {
+        return $this->contactRepository->create($data);
+    }
+
+    public function update(int $id, array $data): Contact {
+        $contact = $this->contactRepository->update($id, $data);
+
+        if (!$contact) {
+            throw new NotFoundHttpException();
+        }
+
+        return $contact;
+    }
+
+    public function deleteById(int $id): void {
+        $success = $this->contactRepository->deleteById($id);
+
+        if (!$success) {
+            throw new NotFoundHttpException();
+        }
+    }
 }
