@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Certification;
 
-use App\Enums\ContactStatus;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class ContactRequest extends FormRequest
+class StoreCertificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +22,12 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:2|max:255',
-            'email' => 'required|email|min:3|max:255',
-            'subject' => 'required|string|min:3|max:255',
-            'message' => 'required|string|min:4',
-            'status' => ['required', Rule::enum(ContactStatus::class)],
+            'title' => 'required|string|min:3|max:255',
+            'institution_name' => 'required|string|min:3|max:180',
+            'issued_date' => 'required|date',
+            'expiration_date' => 'date|nullable',
+            'credential_id' => 'string|min:1|max:255|nullable',
+            'credential_url' => 'string||url:http,https|min:12|max:255|nullable',
         ];
     }
 }
