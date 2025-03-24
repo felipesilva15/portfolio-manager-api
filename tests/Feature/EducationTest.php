@@ -25,7 +25,8 @@ class EducationTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(3);
     }
 
     public function test_can_get_education_by_id(): void

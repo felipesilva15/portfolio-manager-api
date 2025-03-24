@@ -36,7 +36,8 @@ class ProjectTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(2);
     }
 
     public function test_can_get_project_by_id(): void

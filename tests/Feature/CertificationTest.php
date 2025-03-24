@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Certification;
+use App\Models\Tag;
 use Tests\TestCase;
 
 class CertificationTest extends TestCase
@@ -26,7 +27,8 @@ class CertificationTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(3);
     }
 
     public function test_can_get_certification_by_id(): void

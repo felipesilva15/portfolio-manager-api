@@ -9,6 +9,11 @@ class UserTest extends TestCase
 {
     public function test_can_list_users(): void
     {
+        $currentUsersCount = User::select('id')->get()->count();
+        $usersToGenerate = 3;
+        $expectedUsersCount = $currentUsersCount + $usersToGenerate;
+
+        User::factory($usersToGenerate)->create();
         $response = $this->getJson('/api/user', $this->getAuthHeaders());
 
         $response->assertStatus(200)
@@ -21,7 +26,8 @@ class UserTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount($expectedUsersCount);
     }
 
     public function test_can_get_user_by_id(): void

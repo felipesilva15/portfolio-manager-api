@@ -25,7 +25,8 @@ class ContactTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(3);
     }
 
     public function test_can_get_contact_by_id(): void

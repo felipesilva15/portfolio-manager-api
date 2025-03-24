@@ -26,7 +26,8 @@ class ExperienceTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(3);
     }
 
     public function test_can_get_experience_by_id(): void
