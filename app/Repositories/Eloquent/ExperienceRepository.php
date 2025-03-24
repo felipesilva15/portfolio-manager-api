@@ -3,13 +3,12 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Experience;
-use App\Models\Tag;
 use App\Repositories\Interfaces\ExperienceRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class ExperienceRepository implements ExperienceRepositoryInterface {
     public function getAll(): Collection {
-        return Tag::all();
+        return Experience::all();
     }
 
     public function getById(int $id): ?Experience {

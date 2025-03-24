@@ -3,13 +3,12 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Education;
-use App\Models\Tag;
 use App\Repositories\Interfaces\EducationRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class EducationRepository implements EducationRepositoryInterface {
     public function getAll(): Collection {
-        return Tag::all();
+        return Education::all();
     }
 
     public function getById(int $id): ?Education {

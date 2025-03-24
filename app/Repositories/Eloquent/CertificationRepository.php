@@ -3,13 +3,12 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Certification;
-use App\Models\Tag;
 use App\Repositories\Interfaces\CertificationRepositoryInterface;
 use Illuminate\Support\Collection;
 
 class CertificationRepository implements CertificationRepositoryInterface {
     public function getAll(): Collection {
-        return Tag::all();
+        return Certification::all();
     }
 
     public function getById(int $id): ?Certification {
