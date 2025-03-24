@@ -21,7 +21,8 @@ class TagTest extends TestCase
                     'updated_at',
                     'created_at'
                 ]
-            ]);
+            ])
+            ->assertJsonCount(3);
     }
 
     public function test_can_get_tag_by_id(): void
@@ -152,6 +153,18 @@ class TagTest extends TestCase
                             'updated_at',
                             'created_at'
                         ]
+                    ]);
+    }
+
+    public function test_cannot_get_projects_with_invalid_tag_id(): void
+    {
+        $response = $this->getJson('/api/tag/999999/projects',  $this->getAuthHeaders());
+
+        $response->assertNotFound()
+                    ->assertJsonStructure([
+                        'path',
+                        'code',
+                        'message'
                     ]);
     }
 }
