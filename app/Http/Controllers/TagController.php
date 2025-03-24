@@ -2,17 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
-use Illuminate\Http\Request;
+use App\Http\Requests\Tag\StoreTagRequest;
+use App\Http\Requests\Tag\UpdateTagRequest;
+use App\Services\TagService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
-class TagController extends Controller
+class TagController
 {
-    public function __construct(Request $request, Tag $model) {
-        $this->model = $model;
-        $this->request = $request;
+    protected TagService $tagService;
+
+    public function __construct(TagService $tagService) {
+        $this->tagService = $tagService;
     }
 
-    public function projects(Tag $tag) {
-        return response()->json($tag->projects, 200);
+    public function index(): JsonResponse {
+        $tags = $this->tagService->getAll();
+        return response()->json($tags, 200);
+    }
+
+    public function show($id): JsonResponse {
+        $tag = $this->tagService->getById($id);
+        return response()->json($tag, 200);
+    }
+
+    public function store(StoreTagRequest $request): JsonResponse {
+        $tag = $this->tagService->create($request->all());
+        return response()->json($tag, 201);
+    }
+
+    public function update(int $id, UpdateTagRequest $request): JsonResponse {
+        $tag = $this->tagService->update($id, $request->all());
+        return response()->json($tag, 200);
+    }
+
+    public function destroy(int $id): Response {
+        $this->tagService->deleteById($id);
+        return response()->noContent();
+    }
+
+    public function projects(int $id) {
+        return response()->json($this->tagService->getProjectsByTagId($id), 200);
     }
 }
