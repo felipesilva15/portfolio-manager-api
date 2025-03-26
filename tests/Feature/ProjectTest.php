@@ -117,6 +117,8 @@ class ProjectTest extends TestCase
         $project = Project::factory()
                             ->has(Tag::factory()->count(3))
                             ->createOne();
+        $tags = Tag::factory(3)->create();
+        $project->setRelation('tags', $tags);
         
         $data = $project->toArray();
         $data['title'] = 'New title';
@@ -173,6 +175,35 @@ class ProjectTest extends TestCase
     public function test_cannot_delete_project_by_invalid_id(): void
     {
         $response = $this->deleteJson('/api/project/999999', [],  $this->getAuthHeaders());
+
+        $response->assertNotFound()
+                    ->assertJsonStructure([
+                        'path',
+                        'code',
+                        'message'
+                    ]);
+    }
+
+    public function test_can_get_tags_by_project_id(): void
+    {
+        $project = Project::factory()
+                            ->has(Tag::factory()->count(3))
+                            ->createOne();
+
+        $response = $this->getJson('/api/project/'.$project->id.'/tags',  $this->getAuthHeaders());
+
+        $response->assertStatus(200)
+                    ->assertJsonStructure([
+                        '*' => [
+                            'id',
+                            'name'
+                        ]
+                    ]);
+    }
+
+    public function test_cannot_get_tags_with_invalid_project_id(): void
+    {
+        $response = $this->getJson('/api/project/999999/tags',  $this->getAuthHeaders());
 
         $response->assertNotFound()
                     ->assertJsonStructure([
