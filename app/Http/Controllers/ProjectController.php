@@ -2,13 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
+use App\Services\ProjectService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
-class ProjectController extends Controller
+class ProjectController
 {
-    public function __construct(Request $request, Project $model) {
-        $this->model = $model;
-        $this->request = $request;
+    protected ProjectService $projectService;
+
+    public function __construct(ProjectService $projectService) {
+        $this->projectService = $projectService;
+    }
+
+    public function index(): JsonResponse {
+        $projects = $this->projectService->getAll();
+        return response()->json($projects, 200);
+    }
+
+    public function show($id): JsonResponse {
+        $project = $this->projectService->getById($id);
+        return response()->json($project, 200);
+    }
+
+    public function store(StoreProjectRequest $request): JsonResponse {
+        $project = $this->projectService->create($request->all());
+        return response()->json($project, 201);
+    }
+
+    public function update(int $id, UpdateProjectRequest $request): JsonResponse {
+        $project = $this->projectService->update($id, $request->all());
+        return response()->json($project, 200);
+    }
+
+    public function destroy(int $id): Response {
+        $this->projectService->deleteById($id);
+        return response()->noContent();
+    }
+
+    public function tags(int $id) {
+        return response()->json($this->projectService->getTagsByProjectId($id), 200);
     }
 }

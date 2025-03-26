@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/refresh-token', [AuthController::class, 'refresh']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::apiResource('project', ProjectController::class);
+    Route::get('project/{id}/tags', [ProjectController::class, 'tags']);
     Route::apiResource('tag', TagController::class);
     Route::get('tag/{tag}/projects', [TagController::class, 'projects']);
     Route::apiResource('experience', ExperienceController::class);
