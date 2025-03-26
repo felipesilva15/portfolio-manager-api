@@ -41,7 +41,8 @@ class ProjectController
         return response()->noContent();
     }
 
-    public function tags(int $id) {
-        return response()->json($this->projectService->getTagsByProjectId($id), 200);
+    public function tags(int $id): JsonResponse {
+        $tags = $this->projectService->getTagsByProjectId($id);
+        return response()->json($tags, 200);
     }
 }

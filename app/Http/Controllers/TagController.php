@@ -41,7 +41,8 @@ class TagController
         return response()->noContent();
     }
 
-    public function projects(int $id) {
-        return response()->json($this->tagService->getProjectsByTagId($id), 200);
+    public function projects(int $id): JsonResponse {
+        $projects = $this->tagService->getProjectsByTagId($id);
+        return response()->json($projects, 200);
     }
 }
