@@ -20,7 +20,7 @@ class ContactFactory extends Factory
         return [
             'name' => fake()->firstName(),
             'email' => fake()->companyEmail(),
-            'subject' => fake()->word(),
+            'subject' => fake()->sentence(2),
             'message' => fake()->text(rand(50, 300)),
             'status' => ContactStatus::Pending
         ];
