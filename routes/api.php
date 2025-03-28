@@ -13,23 +13,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('user', [UserController::class, 'store']);
+Route::resource('project', ProjectController::class)->only(['index', 'show']);
+Route::resource('tag', TagController::class)->only(['index', 'show']);
+Route::resource('experience', ExperienceController::class)->only(['index', 'show']);
+Route::resource('education', EducationController::class)->only(['index', 'show']);
+Route::resource('certification', CertificationController::class)->only(['index', 'show']);
+Route::resource('contact', ContactController::class)->only(['index', 'show']);
+Route::resource('skill', SkillController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh-token', [AuthController::class, 'refresh']);
     Route::get('/me', [AuthController::class, 'me']);
-    Route::apiResource('project', ProjectController::class);
+    Route::apiResource('project', ProjectController::class)->except(['index', 'show']);
     Route::get('project/{id}/tags', [ProjectController::class, 'tags']);
-    Route::apiResource('tag', TagController::class);
+    Route::apiResource('tag', TagController::class)->except(['index', 'show']);
     Route::get('tag/{tag}/projects', [TagController::class, 'projects']);
-    Route::apiResource('experience', ExperienceController::class);
-    Route::apiResource('education', EducationController::class);
-    Route::apiResource('certification', CertificationController::class);
-    Route::apiResource('contact', ContactController::class);
-    Route::apiResource('skill', SkillController::class);
-
-    Route::get('user', [UserController::class, 'index']);
-    Route::get('user/{id}', [UserController::class, 'show']);
-    Route::put('user/{id}', [UserController::class, 'update']);
-    Route::delete('user/{id}', [UserController::class, 'destroy']);
+    Route::apiResource('experience', ExperienceController::class)->except(['index', 'show']);
+    Route::apiResource('education', EducationController::class)->except(['index', 'show']);
+    Route::apiResource('certification', CertificationController::class)->except(['index', 'show']);
+    Route::apiResource('contact', ContactController::class)->except(['index', 'show']);
+    Route::apiResource('skill', SkillController::class)->except(['index', 'show']);
+    Route::apiResource('user', UserController::class)->except(['store']);
 });
