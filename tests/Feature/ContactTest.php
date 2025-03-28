@@ -10,7 +10,7 @@ class ContactTest extends TestCase
     public function test_can_list_contacts(): void
     {
         Contact::factory(3)->create();
-        $response = $this->getJson('/api/contact', $this->getAuthHeaders());
+        $response = $this->getJson('/api/contact');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -33,7 +33,7 @@ class ContactTest extends TestCase
     {
         $contact = Contact::factory()->createOne();
 
-        $response = $this->getJson('/api/contact/'.$contact->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/contact/'.$contact->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -52,7 +52,7 @@ class ContactTest extends TestCase
 
     public function test_cannot_get_contact_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/contact/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/contact/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

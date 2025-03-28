@@ -10,7 +10,7 @@ class TagTest extends TestCase
     public function test_can_list_tags(): void
     {
         Tag::factory(3)->create();
-        $response = $this->getJson('/api/tag', $this->getAuthHeaders());
+        $response = $this->getJson('/api/tag');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -29,7 +29,7 @@ class TagTest extends TestCase
     {
         $tag = Tag::factory()->createOne();
 
-        $response = $this->getJson('/api/tag/'.$tag->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/tag/'.$tag->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -44,7 +44,7 @@ class TagTest extends TestCase
 
     public function test_cannot_get_tag_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/tag/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/tag/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

@@ -11,7 +11,7 @@ class CertificationTest extends TestCase
     public function test_can_list_certifications(): void
     {
         Certification::factory(3)->create();
-        $response = $this->getJson('/api/certification', $this->getAuthHeaders());
+        $response = $this->getJson('/api/certification');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -35,7 +35,7 @@ class CertificationTest extends TestCase
     {
         $certification = Certification::factory()->createOne();
 
-        $response = $this->getJson('/api/certification/'.$certification->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/certification/'.$certification->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -55,7 +55,7 @@ class CertificationTest extends TestCase
 
     public function test_cannot_get_certification_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/certification/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/certification/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

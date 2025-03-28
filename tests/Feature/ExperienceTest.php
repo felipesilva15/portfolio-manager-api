@@ -10,7 +10,7 @@ class ExperienceTest extends TestCase
     public function test_can_list_experiences(): void
     {
         Experience::factory(3)->create();
-        $response = $this->getJson('/api/experience', $this->getAuthHeaders());
+        $response = $this->getJson('/api/experience');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -34,7 +34,7 @@ class ExperienceTest extends TestCase
     {
         $experience = Experience::factory()->createOne();
 
-        $response = $this->getJson('/api/experience/'.$experience->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/experience/'.$experience->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -54,7 +54,7 @@ class ExperienceTest extends TestCase
 
     public function test_cannot_get_experience_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/experience/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/experience/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

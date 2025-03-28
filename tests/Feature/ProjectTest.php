@@ -15,7 +15,7 @@ class ProjectTest extends TestCase
                     ->count(2)
                     ->create();
         
-        $response = $this->getJson('/api/project', $this->getAuthHeaders());
+        $response = $this->getJson('/api/project');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -46,7 +46,7 @@ class ProjectTest extends TestCase
                         ->has(Tag::factory()->count(3))
                         ->createOne();
 
-        $response = $this->getJson('/api/project/'.$project->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/project/'.$project->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -71,7 +71,7 @@ class ProjectTest extends TestCase
 
     public function test_cannot_get_project_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/project/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/project/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

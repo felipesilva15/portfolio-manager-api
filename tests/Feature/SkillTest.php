@@ -10,7 +10,7 @@ class SkillTest extends TestCase
     public function test_can_list_skills(): void
     {
         Skill::factory(3)->create();
-        $response = $this->getJson('/api/skill', $this->getAuthHeaders());
+        $response = $this->getJson('/api/skill');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -30,7 +30,7 @@ class SkillTest extends TestCase
     {
         $skill = Skill::factory()->createOne();
 
-        $response = $this->getJson('/api/skill/'.$skill->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/skill/'.$skill->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -46,7 +46,7 @@ class SkillTest extends TestCase
 
     public function test_cannot_get_skill_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/skill/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/skill/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([

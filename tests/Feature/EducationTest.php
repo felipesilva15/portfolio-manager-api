@@ -10,7 +10,7 @@ class EducationTest extends TestCase
     public function test_can_list_educations(): void
     {
         Education::factory(3)->create();
-        $response = $this->getJson('/api/education', $this->getAuthHeaders());
+        $response = $this->getJson('/api/education');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -33,7 +33,7 @@ class EducationTest extends TestCase
     {
         $education = Education::factory()->createOne();
 
-        $response = $this->getJson('/api/education/'.$education->id,  $this->getAuthHeaders());
+        $response = $this->getJson('/api/education/'.$education->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -52,7 +52,7 @@ class EducationTest extends TestCase
 
     public function test_cannot_get_education_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/education/999999',  $this->getAuthHeaders());
+        $response = $this->getJson('/api/education/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([
