@@ -25,7 +25,7 @@ class ArrayUtilsTest extends TestCase
         $this->assertTrue($propertyArray == [1, 2]);
     }
 
-    public function test_can_get_array_of_an_nested_array_property()
+    public function test_can_get_array_of_an_nested_array_property(): void
     {
         $array = [
             [

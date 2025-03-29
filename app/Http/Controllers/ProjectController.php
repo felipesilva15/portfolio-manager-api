@@ -21,7 +21,7 @@ class ProjectController
         return response()->json($projects, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $project = $this->projectService->getById($id);
         return response()->json($project, 200);
     }

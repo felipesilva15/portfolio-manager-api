@@ -21,7 +21,7 @@ class CertificationController
         return response()->json($certifications, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $certification = $this->certificationService->getById($id);
         return response()->json($certification, 200);
     }

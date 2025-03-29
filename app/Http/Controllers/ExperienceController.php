@@ -21,7 +21,7 @@ class ExperienceController
         return response()->json($experiences, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $experience = $this->experienceService->getById($id);
         return response()->json($experience, 200);
     }

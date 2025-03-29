@@ -21,7 +21,7 @@ class TagController
         return response()->json($tags, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $tag = $this->tagService->getById($id);
         return response()->json($tag, 200);
     }

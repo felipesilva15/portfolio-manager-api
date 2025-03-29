@@ -21,7 +21,7 @@ class ContactController
         return response()->json($contacts, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $contact = $this->contactService->getById($id);
         return response()->json($contact, 200);
     }

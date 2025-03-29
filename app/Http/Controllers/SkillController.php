@@ -21,7 +21,7 @@ class SkillController
         return response()->json($skills, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $skill = $this->skillService->getById($id);
         return response()->json($skill, 200);
     }

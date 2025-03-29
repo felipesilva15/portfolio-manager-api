@@ -21,7 +21,7 @@ class EducationController
         return response()->json($educations, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $education = $this->educationService->getById($id);
         return response()->json($education, 200);
     }

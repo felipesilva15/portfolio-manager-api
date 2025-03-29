@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -11,7 +12,7 @@ class InvalidCredentialsException extends HttpException
         parent::__construct($code, $message, null, $headers, $code);
     }
 
-    public function render(Request $request) {
+    public function render(Request $request): JsonResponse {
         return response()->json([
             'path' => $request->path(),
             'code' => $this->code,
