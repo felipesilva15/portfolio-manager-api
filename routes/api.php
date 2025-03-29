@@ -12,7 +12,6 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('user', [UserController::class, 'store']);
 Route::resource('project', ProjectController::class)->only(['index', 'show']);
 Route::resource('tag', TagController::class)->only(['index', 'show']);
 Route::resource('experience', ExperienceController::class)->only(['index', 'show']);

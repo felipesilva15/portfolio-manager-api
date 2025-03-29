@@ -18,7 +18,7 @@ class UserService {
         return $this->userRepository->getAll();
     }
 
-    public function getById($id): User {
+    public function getById(int $id): User {
         $user = $this->userRepository->getById($id);
 
         if (!$user) {
@@ -26,10 +26,6 @@ class UserService {
         }
 
         return $user;
-    }
-
-    public function create(array $data): User {
-        return $this->userRepository->create($data);
     }
 
     public function update(int $id, array $data): User {

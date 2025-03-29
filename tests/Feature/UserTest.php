@@ -60,27 +60,6 @@ class UserTest extends TestCase
                     ]);
     }
 
-    public function test_can_create_user(): void
-    {
-        $user = User::factory()->makeOne();
-
-        $data = $user->toArray();
-        $data['password'] = '123';
-
-        $response = $this->postJson('/api/user/', $data);
-
-        $response->assertStatus(201)
-            ->assertJsonIsObject()
-            ->assertJsonStructure([
-                'id',
-                'name',
-                'email',
-                'updated_at',
-                'created_at'
-            ])
-            ->assertJsonFragment(['name' => $user->name]);
-    }
-
     public function test_can_update_user(): void
     {
         $user = User::factory()->createOne();

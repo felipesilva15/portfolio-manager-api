@@ -14,10 +14,7 @@ class UserRepository implements UserRepositoryInterface {
     public function getById(int $id): ?User {
         return User::find($id);
     }
-
-    public function create(array $data): User {
-        return User::create($data);
-    }
+    
     public function update(int $id, array $data): ?User {
         $user = $this->getById($id);
 

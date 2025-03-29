@@ -21,14 +21,9 @@ class UserController
         return response()->json($users, 200);
     }
 
-    public function show($id): JsonResponse {
+    public function show(int $id): JsonResponse {
         $user = $this->userService->getById($id);
         return response()->json($user, 200);
-    }
-    
-    public function store(StoreUserRequest $request): JsonResponse {
-        $user = $this->userService->create($request->validated());
-        return response()->json($user, 201);
     }
 
     public function update(UpdateUserRequest $request, int $id): JsonResponse {
