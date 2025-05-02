@@ -33,6 +33,8 @@ class ProjectTest extends TestCase
                             'name'
                         ]
                     ],
+                    'url',
+                    'github_url',
                     'updated_at',
                     'created_at'
                 ]
@@ -63,6 +65,8 @@ class ProjectTest extends TestCase
                         'name'
                     ]
                 ],
+                'url',
+                'github_url',
                 'updated_at',
                 'created_at'
             ])
@@ -106,6 +110,8 @@ class ProjectTest extends TestCase
                         'name'
                     ]
                 ],
+                'url',
+                'github_url',
                 'updated_at',
                 'created_at'
             ])
@@ -140,6 +146,8 @@ class ProjectTest extends TestCase
                         'name'
                     ]
                 ],
+                'url',
+                'github_url',
                 'updated_at',
                 'created_at'
             ])

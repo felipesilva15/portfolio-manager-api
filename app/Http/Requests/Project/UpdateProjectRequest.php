@@ -30,7 +30,9 @@ class UpdateProjectRequest extends FormRequest
             'thumbnail_url' => 'required|url:http,https',
             'status' => ['required', Rule::enum(ProjectStatus::class)],
             'tags' => 'array',
-            'tags.*.id' => 'required|integer|min:1'
+            'tags.*.id' => 'required|integer|min:1',
+            'url' => 'required|url:http,https|max:512',
+            'github_url' => 'required|url:http,https|max:512'
         ];
     }
 }

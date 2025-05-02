@@ -24,7 +24,9 @@ class ProjectFactory extends Factory
             'description' => fake()->text(),
             'completion_date' => $completed ? fake()->date() : null,
             'thumbnail_url' => fake()->imageUrl(),
-            'status' => $completed ? ProjectStatus::Completed : ProjectStatus::Pending
+            'status' => $completed ? ProjectStatus::Completed : ProjectStatus::Pending,
+            'url' => fake()->url(),
+            'github_url' => fake()->url()
         ];
     }
 }

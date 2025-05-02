@@ -17,7 +17,9 @@ class Project extends Model
         'description',
         'completion_date',
         'thumbnail_url',
-        'status'
+        'status',
+        'url',
+        'github_url'
     ];
 
     protected $with = [
