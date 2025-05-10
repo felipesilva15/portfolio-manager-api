@@ -7,6 +7,7 @@ use App\Repositories\Eloquent\ContactRepository;
 use App\Repositories\Eloquent\EducationRepository;
 use App\Repositories\Eloquent\ExperienceRepository;
 use App\Repositories\Eloquent\ProjectRepository;
+use App\Repositories\Eloquent\ProjectTypeRepository;
 use App\Repositories\Eloquent\SkillRepository;
 use App\Repositories\Eloquent\TagRepository;
 use App\Repositories\Eloquent\UserRepository;
@@ -15,6 +16,7 @@ use App\Repositories\Interfaces\ContactRepositoryInterface;
 use App\Repositories\Interfaces\EducationRepositoryInterface;
 use App\Repositories\Interfaces\ExperienceRepositoryInterface;
 use App\Repositories\Interfaces\ProjectRepositoryInterface;
+use App\Repositories\Interfaces\ProjectTypeRepositoryInterface;
 use App\Repositories\Interfaces\SkillRepositoryInterface;
 use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
@@ -35,5 +37,6 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(SkillRepositoryInterface::class, SkillRepository::class);
         $this->app->bind(TagRepositoryInterface::class, TagRepository::class);
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
+        $this->app->bind(ProjectTypeRepositoryInterface::class, ProjectTypeRepository::class);
     }
 }
