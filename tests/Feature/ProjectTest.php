@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\ProjectType;
 use App\Models\Tag;
 use Tests\TestCase;
 
@@ -35,6 +36,11 @@ class ProjectTest extends TestCase
                     ],
                     'url',
                     'github_url',
+                    'project_type_id',
+                    'project_type' => [
+                        'id',
+                        'name'
+                    ],
                     'updated_at',
                     'created_at'
                 ]
@@ -67,6 +73,11 @@ class ProjectTest extends TestCase
                 ],
                 'url',
                 'github_url',
+                'project_type_id',
+                'project_type' => [
+                    'id',
+                    'name'
+                ],
                 'updated_at',
                 'created_at'
             ])
@@ -112,6 +123,11 @@ class ProjectTest extends TestCase
                 ],
                 'url',
                 'github_url',
+                'project_type_id',
+                'project_type' => [
+                    'id',
+                    'name'
+                ],
                 'updated_at',
                 'created_at'
             ])
@@ -148,6 +164,11 @@ class ProjectTest extends TestCase
                 ],
                 'url',
                 'github_url',
+                'project_type_id',
+                'project_type' => [
+                    'id',
+                    'name'
+                ],
                 'updated_at',
                 'created_at'
             ])
