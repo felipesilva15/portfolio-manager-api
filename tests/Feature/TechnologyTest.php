@@ -17,8 +17,7 @@ class TechnologyTest extends TestCase
             ->assertJsonStructure([
                 '*' => [
                     'id',
-                    'title',
-                    'icon_url',
+                    'name',
                     'updated_at',
                     'created_at'
                 ]
@@ -36,12 +35,11 @@ class TechnologyTest extends TestCase
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'id',
-                'title',
-                'icon_url',
+                'name',
                 'updated_at',
                 'created_at'
             ])
-            ->assertJsonFragment(['title' => $technology->title]);
+            ->assertJsonFragment(['name' => $technology->name]);
     }
 
     public function test_cannot_get_technology_by_invalid_id(): void
@@ -67,19 +65,18 @@ class TechnologyTest extends TestCase
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'id',
-                'title',
-                'icon_url',
+                'name',
                 'updated_at',
                 'created_at'
             ])
-            ->assertJsonFragment(['title' => $technology->title]);
+            ->assertJsonFragment(['name' => $technology->name]);
     }
 
     public function test_can_update_technology(): void
     {
         $technology = Technology::factory()->createOne();
         $data = $technology->toArray();
-        $data['title'] = 'New title';
+        $data['name'] = 'New name';
 
         $response = $this->putJson('/api/technology/'.$technology->id, $data,  $this->getAuthHeaders());
 
@@ -87,12 +84,11 @@ class TechnologyTest extends TestCase
             ->assertJsonIsObject()
             ->assertJsonStructure([
                 'id',
-                'title',
-                'icon_url',
+                'name',
                 'updated_at',
                 'created_at'
             ])
-            ->assertJsonFragment(['title' => 'New title']);
+            ->assertJsonFragment(['name' => 'New name']);
     }
 
     public function test_cannot_update_technology_with_invalid_id(): void
@@ -100,7 +96,7 @@ class TechnologyTest extends TestCase
         $technology = Technology::factory()->createOne();
         
         $data = $technology->toArray();
-        $data['title'] = 'New title';
+        $data['name'] = 'New name';
 
         $response = $this->putJson('/api/technology/999999', $data,  $this->getAuthHeaders());
 
