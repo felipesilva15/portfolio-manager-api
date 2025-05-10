@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Project;
 use App\Models\ProjectType;
 use App\Models\Tag;
+use App\Models\Technology;
 use Tests\TestCase;
 
 class ProjectTest extends TestCase
@@ -13,6 +14,7 @@ class ProjectTest extends TestCase
     {
         Project::factory()
                     ->has(Tag::factory()->count(2))
+                    ->has(Technology::factory()->count(3))
                     ->count(2)
                     ->create();
         
@@ -41,6 +43,12 @@ class ProjectTest extends TestCase
                         'id',
                         'name'
                     ],
+                    'technologies' => [
+                        '*' => [
+                            'id',
+                            'name'
+                        ]
+                    ],
                     'updated_at',
                     'created_at'
                 ]
@@ -52,6 +60,7 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()
                         ->has(Tag::factory()->count(3))
+                        ->has(Technology::factory()->count(2))
                         ->createOne();
 
         $response = $this->getJson('/api/project/'.$project->id);
@@ -78,6 +87,12 @@ class ProjectTest extends TestCase
                     'id',
                     'name'
                 ],
+                'technologies' => [
+                    '*' => [
+                        'id',
+                        'name'
+                    ]
+                ],
                 'updated_at',
                 'created_at'
             ])
@@ -100,7 +115,9 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()->makeOne();
         $tags = Tag::factory(3)->create();
+        $technologies = Technology::factory(3)->create();
         $project->setRelation('tags', $tags);
+        $project->setRelation('technologies', $technologies);
 
         $data = $project->toArray();
 
@@ -128,6 +145,12 @@ class ProjectTest extends TestCase
                     'id',
                     'name'
                 ],
+                'technologies' => [
+                    '*' => [
+                        'id',
+                        'name'
+                    ]
+                ],
                 'updated_at',
                 'created_at'
             ])
@@ -138,9 +161,12 @@ class ProjectTest extends TestCase
     {
         $project = Project::factory()
                             ->has(Tag::factory()->count(3))
+                            ->has(Technology::factory()->count(2))
                             ->createOne();
         $tags = Tag::factory(3)->create();
+        $technologies = Technology::factory(2)->create();
         $project->setRelation('tags', $tags);
+        $project->setRelation('technologies', $technologies);
         
         $data = $project->toArray();
         $data['title'] = 'New title';
@@ -168,6 +194,12 @@ class ProjectTest extends TestCase
                 'project_type' => [
                     'id',
                     'name'
+                ],
+                'technologies' => [
+                    '*' => [
+                        'id',
+                        'name'
+                    ]
                 ],
                 'updated_at',
                 'created_at'
