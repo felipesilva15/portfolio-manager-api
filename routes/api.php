@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTypeController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::resource('certification', CertificationController::class)->only(['index',
 Route::resource('contact', ContactController::class)->only(['index', 'show']);
 Route::resource('skill', SkillController::class)->only(['index', 'show']);
 Route::resource('project_type', ProjectTypeController::class)->only(['index', 'show']);
+Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -36,5 +38,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('contact', ContactController::class)->except(['index', 'show']);
     Route::apiResource('skill', SkillController::class)->except(['index', 'show']);
     Route::apiResource('project_type', ProjectTypeController::class)->except(['index', 'show']);
+    Route::apiResource('technology', TechnologyController::class)->except(['index', 'show']);
     Route::apiResource('user', UserController::class)->except(['store']);
 });
