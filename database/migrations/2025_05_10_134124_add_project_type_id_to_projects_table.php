@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->string('url', '512');
-            $table->string('github_url', '512');
+            $table->foreignId('project_type_id')->nullable()->constrained()->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -23,8 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('url');
-            $table->dropColumn('github_url');
+            $table->dropForeign(['project_type_id']);
+            $table->dropColumn('project_type_id');
         });
     }
 };

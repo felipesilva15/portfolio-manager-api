@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\ProjectStatus;
+use App\Models\ProjectType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +27,8 @@ class ProjectFactory extends Factory
             'thumbnail_url' => fake()->imageUrl(),
             'status' => $completed ? ProjectStatus::Completed : ProjectStatus::Pending,
             'url' => fake()->url(),
-            'github_url' => fake()->url()
+            'github_url' => fake()->url(),
+            'project_type_id' => ProjectType::factory()
         ];
     }
 }

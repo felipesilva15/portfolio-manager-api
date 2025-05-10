@@ -11,6 +11,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\UserController;
+use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -23,6 +24,10 @@ Route::resource('contact', ContactController::class)->only(['index', 'show']);
 Route::resource('skill', SkillController::class)->only(['index', 'show']);
 Route::resource('project_type', ProjectTypeController::class)->only(['index', 'show']);
 Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
+
+Route::get('test', function() {
+    return response()->json(Project::factory()->makeOne());
+});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);

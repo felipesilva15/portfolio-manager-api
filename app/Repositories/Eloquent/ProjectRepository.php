@@ -16,7 +16,10 @@ class ProjectRepository implements ProjectRepositoryInterface {
     }
 
     public function create(array $data): Project {
-        return Project::create($data);
+        $project = Project::create($data);
+        $project->load('project_type');
+
+        return $project;
     }
 
     public function update(int $id, array $data): ?Project {
@@ -27,6 +30,7 @@ class ProjectRepository implements ProjectRepositoryInterface {
         }
 
         $project->update($data);
+        $project->refresh();
 
         return $project;
     }
