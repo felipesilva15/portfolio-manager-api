@@ -36,6 +36,10 @@ class ProjectService {
             $project = $this->syncTags($project, $data['tags']);
         }
 
+        if (isset($data['technologies']) && count($data['technologies']) > 0) {
+            $project = $this->syncTechnologies($project, $data['technologies']);
+        }
+
         return $project;
     }
 
@@ -48,6 +52,10 @@ class ProjectService {
 
         if (isset($data['tags']) && count($data['tags']) > 0) {
             $project = $this->syncTags($project, $data['tags']);
+        }
+
+        if (isset($data['technologies']) && count($data['technologies']) > 0) {
+            $project = $this->syncTechnologies($project, $data['technologies']);
         }
 
         return $project;
@@ -76,5 +84,12 @@ class ProjectService {
         }
 
         return $tags;
+    }
+
+    public function syncTechnologies(Project $project, array $technologies): Project {
+        $technologiesIds = ArrayUtils::getArrayOfAnArrayProperty($technologies, 'id');
+        $project = $this->projectRepository->syncTechnologies($project, $technologiesIds);
+
+        return $project;
     }
 }

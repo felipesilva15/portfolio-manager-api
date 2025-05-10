@@ -33,7 +33,9 @@ class UpdateProjectRequest extends FormRequest
             'tags.*.id' => 'required|integer|min:1',
             'url' => 'required|url:http,https|max:512',
             'github_url' => 'required|url:http,https|max:512',
-            'project_type_id' => 'required|integer|min:1|exists:project_types,id'
+            'project_type_id' => 'required|integer|min:1|exists:project_types,id',
+            'technologies' => 'array',
+            'technologies.*.id' => 'required|integer|min:1|exists:technologies,id'
         ];
     }
 }

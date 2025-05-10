@@ -26,7 +26,8 @@ class Project extends Model
 
     protected $with = [
         'tags:id,name',
-        'project_type:id,name'
+        'project_type:id,name',
+        'technologies:id,name'
     ];
 
     protected function casts(): array {
@@ -42,5 +43,10 @@ class Project extends Model
 
     public function project_type(): BelongsTo {
         return $this->belongsTo(ProjectType::class);
+    }
+
+    public function technologies(): BelongsToMany {
+        return $this->belongsToMany(Technology::class)
+                    ->using(ProjectTechnology::class);
     }
 }

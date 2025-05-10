@@ -14,4 +14,5 @@ interface ProjectRepositoryInterface
     public function deleteById(int $id): bool;
     public function syncTags(Project $project, array $tagIds): Project;
     public function getTagsByProjectId(int $id): ?Collection;
+    public function syncTechnologies(Project $project, array $technologyIds): Project;
 }

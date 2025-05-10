@@ -63,4 +63,11 @@ class ProjectRepository implements ProjectRepositoryInterface {
 
         return $project->tags;
     }
+
+    public function syncTechnologies(Project $project, array $technologiesIds): Project {
+        $project->technologies()->sync($technologiesIds);
+        $project->load(['technologies']);
+
+        return $project;
+    }
 }

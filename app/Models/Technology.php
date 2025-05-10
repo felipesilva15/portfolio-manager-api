@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Technology extends Model
 {
@@ -13,4 +14,13 @@ class Technology extends Model
     protected $fillable = [
         'name'
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
+
+    public function projects(): BelongsToMany {
+        return $this->belongsToMany(Project::class)
+                    ->using(ProjectTechnology::class);
+    }
 }
