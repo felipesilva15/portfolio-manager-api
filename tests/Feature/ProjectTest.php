@@ -26,6 +26,7 @@ class ProjectTest extends TestCase
                 '*' => [
                     'id',
                     'title',
+                    'short_description',
                     'description',
                     'completion_date',
                     'thumbnail_url',
@@ -70,6 +71,7 @@ class ProjectTest extends TestCase
             ->assertJsonStructure([
                 'id',
                 'title',
+                'short_description',
                 'description',
                 'completion_date',
                 'thumbnail_url',
@@ -128,6 +130,7 @@ class ProjectTest extends TestCase
             ->assertJsonStructure([
                 'id',
                 'title',
+                'short_description',
                 'description',
                 'completion_date',
                 'thumbnail_url',
@@ -178,6 +181,7 @@ class ProjectTest extends TestCase
             ->assertJsonStructure([
                 'id',
                 'title',
+                'short_description',
                 'description',
                 'completion_date',
                 'thumbnail_url',
