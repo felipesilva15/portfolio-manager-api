@@ -22,7 +22,8 @@ class ProjectFactory extends Factory
 
         return [
             'title' => fake()->domainName(),
-            'description' => fake()->text(),
+            'short_description' => fake()->text(120),
+            'description' => fake()->text(1000),
             'completion_date' => $completed ? fake()->date() : null,
             'thumbnail_url' => fake()->imageUrl(),
             'status' => $completed ? ProjectStatus::Completed : ProjectStatus::Pending,

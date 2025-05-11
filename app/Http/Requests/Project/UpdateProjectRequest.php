@@ -25,6 +25,7 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:3|max:120',
+            'short_description' => 'string|max:120',
             'description' => 'required|string|max:4096',
             'completion_date' => 'date|nullable',
             'thumbnail_url' => 'required|url:http,https',
