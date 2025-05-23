@@ -20,9 +20,9 @@ Route::resource('tag', TagController::class)->only(['index', 'show']);
 Route::resource('experience', ExperienceController::class)->only(['index', 'show']);
 Route::resource('education', EducationController::class)->only(['index', 'show']);
 Route::resource('certification', CertificationController::class)->only(['index', 'show']);
-Route::resource('contact', ContactController::class)->only(['index', 'show']);
+Route::resource('contact', ContactController::class)->only(['index', 'show', 'store']);
 Route::resource('skill', SkillController::class)->only(['index', 'show']);
-Route::resource('project_type', ProjectTypeController::class)->only(['index', 'show']);
+Route::resource('project-type', ProjectTypeController::class)->only(['index', 'show']);
 Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
 
 Route::get('test', function() {
@@ -40,9 +40,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('experience', ExperienceController::class)->except(['index', 'show']);
     Route::apiResource('education', EducationController::class)->except(['index', 'show']);
     Route::apiResource('certification', CertificationController::class)->except(['index', 'show']);
-    Route::apiResource('contact', ContactController::class)->except(['index', 'show']);
+    Route::apiResource('contact', ContactController::class)->except(['index', 'show', 'store']);
     Route::apiResource('skill', SkillController::class)->except(['index', 'show']);
-    Route::apiResource('project_type', ProjectTypeController::class)->except(['index', 'show']);
+    Route::apiResource('project-type', ProjectTypeController::class)->except(['index', 'show']);
     Route::apiResource('technology', TechnologyController::class)->except(['index', 'show']);
     Route::apiResource('user', UserController::class)->except(['store']);
 });
