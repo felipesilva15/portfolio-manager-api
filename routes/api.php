@@ -25,10 +25,6 @@ Route::resource('skill', SkillController::class)->only(['index', 'show']);
 Route::resource('project-type', ProjectTypeController::class)->only(['index', 'show']);
 Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
 
-Route::get('test', function() {
-    return response()->json(Project::factory()->makeOne());
-});
-
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh-token', [AuthController::class, 'refresh']);
