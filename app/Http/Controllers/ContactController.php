@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Contact\StoreContactRequest;
-use App\Http\Requests\Contact\UpdateContactRequest;
+use App\Http\Requests\Contact\ContactRequest;
 use App\Services\ContactService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class ContactController
         return response()->json($contact, 200);
     }
 
-    public function store(StoreContactRequest $request): JsonResponse {
+    public function store(ContactRequest $request): JsonResponse {
         $contact = $this->contactService->create($request->all());
         return response()->json($contact, 201);
     }
 
-    public function update(int $id, UpdateContactRequest $request): JsonResponse {
+    public function update(int $id, ContactRequest $request): JsonResponse {
         $contact = $this->contactService->update($id, $request->all());
         return response()->json($contact, 200);
     }
