@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Project\StoreProjectRequest;
-use App\Http\Requests\Project\UpdateProjectRequest;
+use App\Http\Requests\Project\ProjectRequest;
 use App\Services\ProjectService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class ProjectController
         return response()->json($project, 200);
     }
 
-    public function store(StoreProjectRequest $request): JsonResponse {
+    public function store(ProjectRequest $request): JsonResponse {
         $project = $this->projectService->create($request->all());
         return response()->json($project, 201);
     }
 
-    public function update(int $id, UpdateProjectRequest $request): JsonResponse {
+    public function update(int $id, ProjectRequest $request): JsonResponse {
         $project = $this->projectService->update($id, $request->all());
         return response()->json($project, 200);
     }
