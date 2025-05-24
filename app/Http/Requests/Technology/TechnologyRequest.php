@@ -4,6 +4,13 @@ namespace App\Http\Requests\Technology;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      schema="TechnologyRequest",
+ *      required={"name"},
+ *      @OA\Property(property="name", type="string", example="Laravel", minLength=1, maxLength=80)
+ * )
+ */
 class TechnologyRequest extends FormRequest
 {
     /**
