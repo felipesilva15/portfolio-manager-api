@@ -14,6 +14,216 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/contact": {
+            "get": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "List all contacts",
+                "operationId": "5a13914944335335387a39ef5445925e",
+                "responses": {
+                    "200": {
+                        "description": "Contact list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Contact"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Registers a contact",
+                "operationId": "4d33e9ce28a28bf1184927750df24ba8",
+                "requestBody": {
+                    "description": "Data for creating a new contact",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered contact data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/contact/{id}": {
+            "get": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "List a contact by ID",
+                "operationId": "783707de57724116780bdd03e441664d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contact data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Update a contact",
+                "operationId": "b3b52c956445f19f048a7a31729d732f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update contact",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ContactRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated contact data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Contact"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Delete a contact",
+                "operationId": "89f7327360c1e83ac0078616cdee160c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contact ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/tag": {
             "get": {
                 "tags": [
@@ -227,6 +437,16 @@
     },
     "components": {
         "schemas": {
+            "ContactStatusEnum": {
+                "description": "Status do contato",
+                "type": "string",
+                "enum": [
+                    "PENDING",
+                    "WAITING_RESPONSE",
+                    "ANSWERED",
+                    "ARCHIVED"
+                ]
+            },
             "ApiErrorDTO": {
                 "properties": {
                     "path": {
@@ -240,6 +460,44 @@
                     "message": {
                         "type": "string",
                         "example": "Error ocurried"
+                    }
+                },
+                "type": "object"
+            },
+            "ContactRequest": {
+                "required": [
+                    "name",
+                    "email",
+                    "subject",
+                    "message",
+                    "status"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 2,
+                        "example": "João"
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "joao@email.com"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "Oferta de emprego"
+                    },
+                    "message": {
+                        "type": "string",
+                        "minLength": 4,
+                        "example": "<p>Boa tarde!</p><p>Tenho uma oferta de emprego para você</p>"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ContactStatusEnum"
                     }
                 },
                 "type": "object"
@@ -272,6 +530,44 @@
                 },
                 "type": "object"
             },
+            "Contact": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "João"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "joao@email.com"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "example": "Oferta de emprego"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "<p>Boa tarde!</p><p>Tenho uma oferta de emprego para você</p>"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ContactStatusEnum"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
             "Tag": {
                 "properties": {
                     "id": {
@@ -298,6 +594,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Contact",
+            "description": "Contact"
+        },
         {
             "name": "Tag",
             "description": "Tag"

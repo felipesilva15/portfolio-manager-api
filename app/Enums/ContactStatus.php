@@ -2,6 +2,14 @@
 
 namespace App\Enums;
 
+/**
+ * @OA\Schema(
+ *   schema="ContactStatusEnum",
+ *   type="string",
+ *   description="Status do contato",
+ *   enum={"PENDING", "WAITING_RESPONSE", "ANSWERED", "ARCHIVED"}
+ * )
+ */
 enum ContactStatus: string
 {
     case Pending = 'PENDING';
