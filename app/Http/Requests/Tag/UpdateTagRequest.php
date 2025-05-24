@@ -4,6 +4,13 @@ namespace App\Http\Requests\Tag;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      schema="UpdateTagRequest",
+ *      required={"name"},
+ *      @OA\Property(property="name", type="string", example="API", minLength=1, maxLength=80)
+ * )
+ */
 class UpdateTagRequest extends FormRequest
 {
     /**
