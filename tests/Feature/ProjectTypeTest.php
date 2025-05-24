@@ -10,7 +10,7 @@ class ProjectTypeTest extends TestCase
     public function test_can_list_project_types(): void
     {
         ProjectType::factory(3)->create();
-        $response = $this->getJson('/api/project_type');
+        $response = $this->getJson('/api/project-type');
 
         $response->assertStatus(200)
             ->assertJsonIsArray()
@@ -29,7 +29,7 @@ class ProjectTypeTest extends TestCase
     {
         $projectType = ProjectType::factory()->createOne();
 
-        $response = $this->getJson('/api/project_type/'.$projectType->id);
+        $response = $this->getJson('/api/project-type/'.$projectType->id);
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -44,7 +44,7 @@ class ProjectTypeTest extends TestCase
 
     public function test_cannot_get_project_type_by_invalid_id(): void
     {
-        $response = $this->getJson('/api/project_type/999999');
+        $response = $this->getJson('/api/project-type/999999');
 
         $response->assertNotFound()
                     ->assertJsonStructure([
@@ -59,7 +59,7 @@ class ProjectTypeTest extends TestCase
         $projectType = ProjectType::factory()->makeOne();
         $data = $projectType->toArray();
 
-        $response = $this->postJson('/api/project_type/', $data, $this->getAuthHeaders());
+        $response = $this->postJson('/api/project-type/', $data, $this->getAuthHeaders());
 
         $response->assertStatus(201)
             ->assertJsonIsObject()
@@ -78,7 +78,7 @@ class ProjectTypeTest extends TestCase
         $data = $projectType->toArray();
         $data['name'] = 'New name';
 
-        $response = $this->putJson('/api/project_type/'.$projectType->id, $data,  $this->getAuthHeaders());
+        $response = $this->putJson('/api/project-type/'.$projectType->id, $data,  $this->getAuthHeaders());
 
         $response->assertStatus(200)
             ->assertJsonIsObject()
@@ -98,7 +98,7 @@ class ProjectTypeTest extends TestCase
         $data = $projectType->toArray();
         $data['name'] = 'New name';
 
-        $response = $this->putJson('/api/project_type/999999', $data,  $this->getAuthHeaders());
+        $response = $this->putJson('/api/project-type/999999', $data,  $this->getAuthHeaders());
 
         $response->assertNotFound()
                     ->assertJsonStructure([
@@ -112,14 +112,14 @@ class ProjectTypeTest extends TestCase
     {
         $projectType = ProjectType::factory()->createOne();
 
-        $response = $this->deleteJson('/api/project_type/'.$projectType->id, [],  $this->getAuthHeaders());
+        $response = $this->deleteJson('/api/project-type/'.$projectType->id, [],  $this->getAuthHeaders());
 
         $response->assertNoContent();
     }
 
     public function test_cannot_delete_project_type_by_invalid_id(): void
     {
-        $response = $this->deleteJson('/api/project_type/999999', [],  $this->getAuthHeaders());
+        $response = $this->deleteJson('/api/project-type/999999', [],  $this->getAuthHeaders());
 
         $response->assertNotFound()
                     ->assertJsonStructure([
