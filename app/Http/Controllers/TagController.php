@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Tag\StoreTagRequest;
-use App\Http\Requests\Tag\UpdateTagRequest;
+use App\Http\Requests\Tag\TagRequest;
 use App\Services\TagService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -73,7 +72,7 @@ class TagController
      *      @OA\RequestBody(
      *         required=true,
      *         description="Data for creating a new tag",
-     *         @OA\JsonContent(ref="#/components/schemas/StoreTagRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/TagRequest")
      *      ),
      *      @OA\Response(
      *          response="201", 
@@ -87,7 +86,7 @@ class TagController
      *      )
      * )
      */
-    public function store(StoreTagRequest $request): JsonResponse {
+    public function store(TagRequest $request): JsonResponse {
         $tag = $this->tagService->create($request->all());
         return response()->json($tag, 201);
     }
@@ -107,7 +106,7 @@ class TagController
      *      @OA\RequestBody(
      *         required=true,
      *         description="Data for update tag",
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateTagRequest")
+     *         @OA\JsonContent(ref="#/components/schemas/TagRequest")
      *      ),
      *      @OA\Response(
      *          response="200", 
@@ -126,7 +125,7 @@ class TagController
      *      )
      * )
      */
-    public function update(int $id, UpdateTagRequest $request): JsonResponse {
+    public function update(int $id, TagRequest $request): JsonResponse {
         $tag = $this->tagService->update($id, $request->all());
         return response()->json($tag, 200);
     }

@@ -6,12 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * @OA\Schema(
- *      schema="StoreTagRequest",
+ *      schema="TagRequest",
  *      required={"name"},
  *      @OA\Property(property="name", type="string", example="API", minLength=1, maxLength=80)
  * )
  */
-class StoreTagRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
