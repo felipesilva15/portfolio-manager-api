@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Technology\StoreTechnologyRequest;
-use App\Http\Requests\Technology\UpdateTechnologyRequest;
+use App\Http\Requests\Technology\TechnologyRequest;
 use App\Services\TechnologyService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class TechnologyController extends Controller
         return response()->json($technology, 200);
     }
 
-    public function store(StoreTechnologyRequest $request): JsonResponse {
+    public function store(TechnologyRequest $request): JsonResponse {
         $technology = $this->technologyService->create($request->all());
         return response()->json($technology, 201);
     }
 
-    public function update(int $id, UpdateTechnologyRequest $request): JsonResponse {
+    public function update(int $id, TechnologyRequest $request): JsonResponse {
         $technology = $this->technologyService->update($id, $request->all());
         return response()->json($technology, 200);
     }
