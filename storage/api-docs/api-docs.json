@@ -259,7 +259,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/StoreTagRequest"
+                                "$ref": "#/components/schemas/TagRequest"
                             }
                         }
                     }
@@ -352,7 +352,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateTagRequest"
+                                "$ref": "#/components/schemas/TagRequest"
                             }
                         }
                     }
@@ -502,21 +502,7 @@
                 },
                 "type": "object"
             },
-            "StoreTagRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "maxLength": 80,
-                        "minLength": 1,
-                        "example": "API"
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateTagRequest": {
+            "TagRequest": {
                 "required": [
                     "name"
                 ],

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProjectType\StoreProjectTypeRequest;
-use App\Http\Requests\ProjectType\UpdateProjectTypeRequest;
+use App\Http\Requests\ProjectType\ProjectTypeRequest;
 use App\Services\ProjectTypeService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class ProjectTypeController extends Controller
         return response()->json($projectType, 200);
     }
 
-    public function store(StoreProjectTypeRequest $request): JsonResponse {
+    public function store(ProjectTypeRequest $request): JsonResponse {
         $projectType = $this->projectTypeService->create($request->all());
         return response()->json($projectType, 201);
     }
 
-    public function update(int $id, UpdateProjectTypeRequest $request): JsonResponse {
+    public function update(int $id, ProjectTypeRequest $request): JsonResponse {
         $projectType = $this->projectTypeService->update($id, $request->all());
         return response()->json($projectType, 200);
     }
