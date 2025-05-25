@@ -4,6 +4,17 @@ namespace App\Http\Requests\Education;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      schema="EducationRequest",
+ *      required={"institution_name", "degree", "locality", "start_date"},
+ *      @OA\Property(property="institution_name", type="string", example="SENAC", minLength=3, maxLength=180),
+ *      @OA\Property(property="degree", type="string", example="Graduação em Sistemas para Internet", minLength=3, maxLength=80),
+ *      @OA\Property(property="locality", type="string", example="São Paulo, SP", minLength=2, maxLength=120),
+ *      @OA\Property(property="start_date", type="string", format="date", example="2022-02-01"),
+ *      @OA\Property(property="end_date", type="string", format="date", example="2024-07-01", nullable=true)
+ * )
+ */
 class EducationRequest extends FormRequest
 {
     /**

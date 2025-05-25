@@ -4,6 +4,14 @@ namespace App\Http\Requests\Skill;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @OA\Schema(
+ *      schema="SkillRequest",
+ *      required={"title", "icon_url"},
+ *      @OA\Property(property="title", type="string", example="Laravel", minLength=1, maxLength=80),
+ *      @OA\Property(property="icon_url", type="string", format="url", example="http://localhost:8000/icons/laravel.png", minLength=12, maxLength=255)
+ * )
+ */
 class SkillRequest extends FormRequest
 {
     /**
@@ -23,7 +31,7 @@ class SkillRequest extends FormRequest
     {
         return [    
             'title' => 'required|string|min:1|max:80',
-            'icon_url' => 'required|string||url:http,https|min:12|max:255',
+            'icon_url' => 'required|string|url:http,https|min:12|max:255',
         ];
     }
 }

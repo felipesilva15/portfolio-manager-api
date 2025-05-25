@@ -224,6 +224,426 @@
                 }
             }
         },
+        "/api/education": {
+            "get": {
+                "tags": [
+                    "Education"
+                ],
+                "summary": "List all educations",
+                "operationId": "73aa78fb94b62fc03eb30239cc28fb80",
+                "responses": {
+                    "200": {
+                        "description": "Education list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Education"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Education"
+                ],
+                "summary": "Registers a education",
+                "operationId": "3a3c468013742c18e70acc1c01a84aa7",
+                "requestBody": {
+                    "description": "Data for creating a new education",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EducationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered education data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Education"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/education/{id}": {
+            "get": {
+                "tags": [
+                    "Education"
+                ],
+                "summary": "List a education by ID",
+                "operationId": "14b402d7026cc1ae86b3c361dc60d404",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Education ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Education data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Education"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Education"
+                ],
+                "summary": "Update a education",
+                "operationId": "4e3183bf6611783580cbe239665905c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Education ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update education",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EducationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated education data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Education"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Education"
+                ],
+                "summary": "Delete a education",
+                "operationId": "1112778dc5744b5dfaa973afb5368ff4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Education ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/experience": {
+            "get": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "List all experiences",
+                "operationId": "cb3d42a19b41e599db04f7c5d4f87251",
+                "responses": {
+                    "200": {
+                        "description": "Experience list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Experience"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "Registers a experience",
+                "operationId": "ae711cfab67204b6d2c3442b7cccc521",
+                "requestBody": {
+                    "description": "Data for creating a new experience",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExperienceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered experience data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Experience"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/experience/{id}": {
+            "get": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "List a experience by ID",
+                "operationId": "721de71853e29008a899893c87432342",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Experience data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Experience"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "Update a experience",
+                "operationId": "fc45360034b26de899c4bdaf4b9bb837",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update experience",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExperienceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated experience data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Experience"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Experience"
+                ],
+                "summary": "Delete a experience",
+                "operationId": "727da3a68512ab683b6ade02d13649b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Experience ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/project": {
             "get": {
                 "tags": [
@@ -611,6 +1031,216 @@
                         "name": "id",
                         "in": "path",
                         "description": "Project Type ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/skill": {
+            "get": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "List all skills",
+                "operationId": "f3f4b453d14918cd314f9b1c29e5d9d3",
+                "responses": {
+                    "200": {
+                        "description": "Skill list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Skill"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Registers a skill",
+                "operationId": "aa2c97b28d6055c6525d45236bdea320",
+                "requestBody": {
+                    "description": "Data for creating a new skill",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SkillRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered skill data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skill"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/skill/{id}": {
+            "get": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "List a skill by ID",
+                "operationId": "e572ace3eed3334d7eb078d953970e1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Skill ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Skill data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skill"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Update a skill",
+                "operationId": "68cb15061092ecc9ab5f6edb759a6885",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Skill ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update skill",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SkillRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated skill data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skill"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Skill"
+                ],
+                "summary": "Delete a skill",
+                "operationId": "f34a6c9000c4564381e25e5806c1bf6f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Skill ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -1142,6 +1772,92 @@
                 },
                 "type": "object"
             },
+            "EducationRequest": {
+                "required": [
+                    "institution_name",
+                    "degree",
+                    "locality",
+                    "start_date"
+                ],
+                "properties": {
+                    "institution_name": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 3,
+                        "example": "SENAC"
+                    },
+                    "degree": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "minLength": 3,
+                        "example": "Graduação em Sistemas para Internet"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 2,
+                        "example": "São Paulo, SP"
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2022-02-01"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-07-01",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ExperienceRequest": {
+                "required": [
+                    "company_name",
+                    "position",
+                    "locality",
+                    "description",
+                    "start_date"
+                ],
+                "properties": {
+                    "company_name": {
+                        "type": "string",
+                        "maxLength": 180,
+                        "minLength": 3,
+                        "example": "PWI Sistemas"
+                    },
+                    "position": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "minLength": 3,
+                        "example": "Analista desenvolvedor fullstack"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 2,
+                        "example": "São Paulo, SP"
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 4096,
+                        "example": "Atuei como desenvolvedor fullstack com as tecnologias Angular, Laravel, Node e SQL."
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2020-09-22"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": null,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "ProjectTypeRequest": {
                 "required": [
                     "name"
@@ -1251,6 +1967,28 @@
                 },
                 "type": "object"
             },
+            "SkillRequest": {
+                "required": [
+                    "title",
+                    "icon_url"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "minLength": 1,
+                        "example": "Laravel"
+                    },
+                    "icon_url": {
+                        "type": "string",
+                        "format": "url",
+                        "maxLength": 255,
+                        "minLength": 12,
+                        "example": "http://localhost:8000/icons/laravel.png"
+                    }
+                },
+                "type": "object"
+            },
             "TagRequest": {
                 "required": [
                     "name"
@@ -1303,6 +2041,92 @@
                     },
                     "status": {
                         "$ref": "#/components/schemas/ContactStatusEnum"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Education": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "institution_name": {
+                        "type": "string",
+                        "example": "SENAC"
+                    },
+                    "degree": {
+                        "type": "string",
+                        "example": "Graduação em Sistemas para Internet"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "example": "São Paulo, SP"
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2022-02-01"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-07-01"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Experience": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "company_name": {
+                        "type": "string",
+                        "example": "PWI Sistemas"
+                    },
+                    "position": {
+                        "type": "string",
+                        "example": "Analista desenvolvedor fullstack"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "example": "São Paulo, SP"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Atuei como desenvolvedor fullstack com as tecnologias Angular, Laravel, Node e SQL."
+                    },
+                    "start_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2020-09-22"
+                    },
+                    "end_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": null
                     },
                     "created_at": {
                         "type": "string",
@@ -1439,6 +2263,34 @@
                 },
                 "type": "object"
             },
+            "Skill": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Laravel"
+                    },
+                    "icon_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/icons/laravel.png"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
             "Tag": {
                 "properties": {
                     "id": {
@@ -1493,12 +2345,24 @@
             "description": "Contact"
         },
         {
+            "name": "Education",
+            "description": "Education"
+        },
+        {
+            "name": "Experience",
+            "description": "Experience"
+        },
+        {
             "name": "Project",
             "description": "Project"
         },
         {
             "name": "ProjectType",
             "description": "ProjectType"
+        },
+        {
+            "name": "Skill",
+            "description": "Skill"
         },
         {
             "name": "Tag",
