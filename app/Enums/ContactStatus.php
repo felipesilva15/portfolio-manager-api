@@ -6,7 +6,7 @@ namespace App\Enums;
  * @OA\Schema(
  *   schema="ContactStatusEnum",
  *   type="string",
- *   description="Status do contato",
+ *   description="Contact status",
  *   enum={"PENDING", "WAITING_RESPONSE", "ANSWERED", "ARCHIVED"}
  * )
  */
