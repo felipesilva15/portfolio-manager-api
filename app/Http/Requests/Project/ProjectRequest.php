@@ -13,15 +13,16 @@ use Illuminate\Validation\Rule;
  *      @OA\Property(property="title", type="string", example="Portfólio", minLength=3, maxLength=120),
  *      @OA\Property(property="short_description", type="string", example="Um projeto de portfólio", maxLength=120),
  *      @OA\Property(property="description", type="string", example="<p>Meu portfólio desenvolvido em Laravel</p>", maxLength=4096),
- *      @OA\Property(property="completion_date", type="string", format="date", example="2025-04-28"),
+ *      @OA\Property(property="completion_date", type="string", format="date", example="2025-04-28", nullable=true),
  *      @OA\Property(property="thumbnail_url", type="string", format="url", example="http://localhost:8000/images/logo.png"),
  *      @OA\Property(property="status", ref="#/components/schemas/ProjectStatusEnum"),
- *      @OA\Property(property="url", type="string", format="url", example="http://localhost:8000/api/documentation"),
- *      @OA\Property(property="github_url", type="string", format="url", example="https://github.com/felipesilva15/portfolio-manager-api"),
- *      @OA\Property(property="project_type_id", type="integer", example=1),
+ *      @OA\Property(property="url", type="string", format="url", example="http://localhost:8000/api/documentation", maxLength=512),
+ *      @OA\Property(property="github_url", type="string", format="url", example="https://github.com/felipesilva15/portfolio-manager-api", maxLength=512),
+ *      @OA\Property(property="project_type_id", type="integer", example=1, minimum=1),
  *      @OA\Property(
  *          property="tags", 
  *          type="array",
+ *          minItems=1,
  *          @OA\Items(
  *              required={"id"},
  *              @OA\Property(property="id", type="integer", example=1)
@@ -30,6 +31,7 @@ use Illuminate\Validation\Rule;
  *      @OA\Property(
  *          property="technologies", 
  *          type="array",
+ *          minItems=1,
  *          @OA\Items(
  *              required={"id"},
  *              @OA\Property(property="id", type="integer", example=1)

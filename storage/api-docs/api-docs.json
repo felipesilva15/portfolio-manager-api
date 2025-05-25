@@ -1188,7 +1188,8 @@
                     "completion_date": {
                         "type": "string",
                         "format": "date",
-                        "example": "2025-04-28"
+                        "example": "2025-04-28",
+                        "nullable": true
                     },
                     "thumbnail_url": {
                         "type": "string",
@@ -1201,15 +1202,18 @@
                     "url": {
                         "type": "string",
                         "format": "url",
+                        "maxLength": 512,
                         "example": "http://localhost:8000/api/documentation"
                     },
                     "github_url": {
                         "type": "string",
                         "format": "url",
+                        "maxLength": 512,
                         "example": "https://github.com/felipesilva15/portfolio-manager-api"
                     },
                     "project_type_id": {
                         "type": "integer",
+                        "minimum": 1,
                         "example": 1
                     },
                     "tags": {
@@ -1225,7 +1229,8 @@
                                 }
                             },
                             "type": "object"
-                        }
+                        },
+                        "minItems": 1
                     },
                     "technologies": {
                         "type": "array",
@@ -1240,7 +1245,8 @@
                                 }
                             },
                             "type": "object"
-                        }
+                        },
+                        "minItems": 1
                     }
                 },
                 "type": "object"
