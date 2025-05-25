@@ -224,6 +224,216 @@
                 }
             }
         },
+        "/api/project": {
+            "get": {
+                "tags": [
+                    "Project"
+                ],
+                "summary": "List all projects",
+                "operationId": "f393498858a74b322694c52ae6708ed3",
+                "responses": {
+                    "200": {
+                        "description": "Project list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Project"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Project"
+                ],
+                "summary": "Registers a project",
+                "operationId": "827a2e2eb71eab9f4af96e5882d9f60b",
+                "requestBody": {
+                    "description": "Data for creating a new project",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered project data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/project/{id}": {
+            "get": {
+                "tags": [
+                    "Project"
+                ],
+                "summary": "List a project by ID",
+                "operationId": "a4cb6a3e6a453cd9519dd551d5a4c9be",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Project"
+                ],
+                "summary": "Update a project",
+                "operationId": "e578e816220db8628535dc004fb1ed5c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update project",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProjectRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated project data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Project"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Project"
+                ],
+                "summary": "Delete a project",
+                "operationId": "0e8c58d9d152f408231232bc3c5b27f2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/project-type": {
             "get": {
                 "tags": [
@@ -858,13 +1068,23 @@
     "components": {
         "schemas": {
             "ContactStatusEnum": {
-                "description": "Status do contato",
+                "description": "Contact status",
                 "type": "string",
                 "enum": [
                     "PENDING",
                     "WAITING_RESPONSE",
                     "ANSWERED",
                     "ARCHIVED"
+                ]
+            },
+            "ProjectStatusEnum": {
+                "description": "Project status",
+                "type": "string",
+                "enum": [
+                    "PENDING",
+                    "IN_PROGRESS",
+                    "COMPLETED",
+                    "ABANDONED"
                 ]
             },
             "ApiErrorDTO": {
@@ -936,6 +1156,95 @@
                 },
                 "type": "object"
             },
+            "ProjectRequest": {
+                "required": [
+                    "title",
+                    "description",
+                    "thumbnail_url",
+                    "status",
+                    "url",
+                    "github_url",
+                    "project_type_id",
+                    "technologies",
+                    "tags"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 3,
+                        "example": "Portfólio"
+                    },
+                    "short_description": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "example": "Um projeto de portfólio"
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 4096,
+                        "example": "<p>Meu portfólio desenvolvido em Laravel</p>"
+                    },
+                    "completion_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-28"
+                    },
+                    "thumbnail_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/images/logo.png"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ProjectStatusEnum"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/api/documentation"
+                    },
+                    "github_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://github.com/felipesilva15/portfolio-manager-api"
+                    },
+                    "project_type_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "technologies": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "id"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "TagRequest": {
                 "required": [
                     "name"
@@ -988,6 +1297,79 @@
                     },
                     "status": {
                         "$ref": "#/components/schemas/ContactStatusEnum"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Project": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Portfólio"
+                    },
+                    "short_description": {
+                        "type": "string",
+                        "example": "Um projeto de portfólio"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "<p>Meu portfólio desenvolvido em Laravel</p>"
+                    },
+                    "completion_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-28"
+                    },
+                    "thumbnail_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/images/logo.png"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/ProjectStatusEnum"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/api/documentation"
+                    },
+                    "github_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://github.com/felipesilva15/portfolio-manager-api"
+                    },
+                    "project_type_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "project_type": {
+                        "$ref": "#/components/schemas/ProjectType"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Tag"
+                        }
+                    },
+                    "technologies": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Technology"
+                        }
                     },
                     "created_at": {
                         "type": "string",
@@ -1077,6 +1459,10 @@
         {
             "name": "Contact",
             "description": "Contact"
+        },
+        {
+            "name": "Project",
+            "description": "Project"
         },
         {
             "name": "ProjectType",
