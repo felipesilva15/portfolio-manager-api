@@ -1362,13 +1362,13 @@
                     "tags": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Tag"
+                            "$ref": "#/components/schemas/ProjectTag"
                         }
                     },
                     "technologies": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Technology"
+                            "$ref": "#/components/schemas/ProjectTechnology"
                         }
                     },
                     "created_at": {
@@ -1380,6 +1380,32 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "ProjectTag": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "API"
+                    }
+                },
+                "type": "object"
+            },
+            "ProjectTechnology": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Laravel"
                     }
                 },
                 "type": "object"

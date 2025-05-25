@@ -25,12 +25,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *      @OA\Property(
  *          property="tags", 
  *          type="array",
- *          @OA\Items(ref="#/components/schemas/Tag")
+ *          @OA\Items(ref="#/components/schemas/ProjectTag")
  *      ),
  *      @OA\Property(
  *          property="technologies", 
  *          type="array",
- *          @OA\Items(ref="#/components/schemas/Technology")
+ *          @OA\Items(ref="#/components/schemas/ProjectTechnology")
  *      ),
  *      @OA\Property(property="created_at", type="string", format="date-time", example="2025-04-28T11:23:31.000000Z"),
  *      @OA\Property(property="updated_at", type="string", format="date-time", example="2025-04-28T11:23:31.000000Z")
