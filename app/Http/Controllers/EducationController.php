@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Education\StoreEducationRequest;
-use App\Http\Requests\Education\UpdateEducationRequest;
+use App\Http\Requests\Education\EducationRequest;
 use App\Services\EducationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class EducationController
         return response()->json($education, 200);
     }
 
-    public function store(StoreEducationRequest $request): JsonResponse {
+    public function store(EducationRequest $request): JsonResponse {
         $education = $this->educationService->create($request->all());
         return response()->json($education, 201);
     }
 
-    public function update(int $id, UpdateEducationRequest $request): JsonResponse {
+    public function update(int $id, EducationRequest $request): JsonResponse {
         $education = $this->educationService->update($id, $request->all());
         return response()->json($education, 200);
     }

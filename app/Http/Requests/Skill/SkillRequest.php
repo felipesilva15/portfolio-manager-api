@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Education;
+namespace App\Http\Requests\Skill;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateEducationRequest extends FormRequest
+class SkillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,9 @@ class UpdateEducationRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'institution_name' => 'required|string|min:3|max:180',
-            'degree' => 'required|string|min:3|max:80',
-            'locality' => 'required|string|min:2|max:120',
-            'start_date' => 'required|date',
-            'end_date' => 'date|nullable',
+        return [    
+            'title' => 'required|string|min:1|max:80',
+            'icon_url' => 'required|string||url:http,https|min:12|max:255',
         ];
     }
 }

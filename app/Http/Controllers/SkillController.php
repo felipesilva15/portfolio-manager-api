@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Skill\StoreSkillRequest;
-use App\Http\Requests\Skill\UpdateSkillRequest;
+use App\Http\Requests\Skill\SkillRequest;
 use App\Services\SkillService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class SkillController
         return response()->json($skill, 200);
     }
 
-    public function store(StoreSkillRequest $request): JsonResponse {
+    public function store(SkillRequest $request): JsonResponse {
         $skill = $this->skillService->create($request->all());
         return response()->json($skill, 201);
     }
 
-    public function update(int $id, UpdateSkillRequest $request): JsonResponse {
+    public function update(int $id, SkillRequest $request): JsonResponse {
         $skill = $this->skillService->update($id, $request->all());
         return response()->json($skill, 200);
     }

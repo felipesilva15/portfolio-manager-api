@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Experience\StoreExperienceRequest;
-use App\Http\Requests\Experience\UpdateExperienceRequest;
+use App\Http\Requests\Experience\ExperienceRequest;
 use App\Services\ExperienceService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,12 +25,12 @@ class ExperienceController
         return response()->json($experience, 200);
     }
 
-    public function store(StoreExperienceRequest $request): JsonResponse {
+    public function store(ExperienceRequest $request): JsonResponse {
         $experience = $this->experienceService->create($request->all());
         return response()->json($experience, 201);
     }
 
-    public function update(int $id, UpdateExperienceRequest $request): JsonResponse {
+    public function update(int $id, ExperienceRequest $request): JsonResponse {
         $experience = $this->experienceService->update($id, $request->all());
         return response()->json($experience, 200);
     }
