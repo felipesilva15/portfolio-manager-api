@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\User\StoreUserRequest;
-use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Requests\User\UserRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -26,7 +25,7 @@ class UserController
         return response()->json($user, 200);
     }
 
-    public function update(UpdateUserRequest $request, int $id): JsonResponse {
+    public function update(UserRequest $request, int $id): JsonResponse {
         $user = $this->userService->update($id, $request->validated());
         return response()->json($user, 200);
     }

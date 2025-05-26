@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Certification;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCertificationRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,9 @@ class UpdateCertificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|min:3|max:255',
-            'institution_name' => 'required|string|min:3|max:180',
-            'issued_date' => 'required|date',
-            'expiration_date' => 'date|nullable',
-            'credential_id' => 'string|min:1|max:255|nullable',
-            'credential_url' => 'string||url:http,https|min:12|max:255|nullable',
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|email|min:3|max:255|unique:users,email,'.$this->id,
+            'password' => 'required|string|min:3|max:255'
         ];
     }
 }
