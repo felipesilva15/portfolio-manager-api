@@ -11,6 +11,7 @@ use App\Repositories\Eloquent\ProjectTypeRepository;
 use App\Repositories\Eloquent\SkillRepository;
 use App\Repositories\Eloquent\TagRepository;
 use App\Repositories\Eloquent\TechnologyRepository;
+use App\Repositories\Eloquent\TestimonialRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Interfaces\CertificationRepositoryInterface;
 use App\Repositories\Interfaces\ContactRepositoryInterface;
@@ -21,6 +22,7 @@ use App\Repositories\Interfaces\ProjectTypeRepositoryInterface;
 use App\Repositories\Interfaces\SkillRepositoryInterface;
 use App\Repositories\Interfaces\TagRepositoryInterface;
 use App\Repositories\Interfaces\TechnologyRepositoryInterface;
+use App\Repositories\Interfaces\TestimonialRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -41,5 +43,6 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(ProjectRepositoryInterface::class, ProjectRepository::class);
         $this->app->bind(ProjectTypeRepositoryInterface::class, ProjectTypeRepository::class);
         $this->app->bind(TechnologyRepositoryInterface::class, TechnologyRepository::class);
+        $this->app->bind(TestimonialRepositoryInterface::class, TestimonialRepository::class);
     }
 }
