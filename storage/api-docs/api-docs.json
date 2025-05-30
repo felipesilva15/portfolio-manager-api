@@ -1904,6 +1904,216 @@
                 }
             }
         },
+        "/api/testimonial": {
+            "get": {
+                "tags": [
+                    "Testimonial"
+                ],
+                "summary": "List all testimonials",
+                "operationId": "29dceab3d7dd37a312fe0989cb64f2c6",
+                "responses": {
+                    "200": {
+                        "description": "Testimonial list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Testimonial"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Testimonial"
+                ],
+                "summary": "Registers a testimonial",
+                "operationId": "16448d73729717b9eab983ffae96855b",
+                "requestBody": {
+                    "description": "Data for creating a new testimonial",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TestimonialRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered testimonial data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Testimonial"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/testimonial/{id}": {
+            "get": {
+                "tags": [
+                    "Testimonial"
+                ],
+                "summary": "List a testimonial by ID",
+                "operationId": "3e927beb4caccb0f16968f1bbcd653a2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Testimonial ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Testimonial data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Testimonial"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Testimonial"
+                ],
+                "summary": "Update a testimonial",
+                "operationId": "22d7f7bc0962747301926f37e7b7ea40",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Testimonial ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update testimonial",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TestimonialRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated testimonial data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Testimonial"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Testimonial"
+                ],
+                "summary": "Delete a testimonial",
+                "operationId": "ba74a69561d084bd10cb53ee71f17ff7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Testimonial ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/user": {
             "get": {
                 "tags": [
@@ -2095,6 +2305,15 @@
                     "IN_PROGRESS",
                     "COMPLETED",
                     "ABANDONED"
+                ]
+            },
+            "SexEnum": {
+                "description": "Sexual orientation",
+                "type": "string",
+                "enum": [
+                    "F",
+                    "M",
+                    "O"
                 ]
             },
             "ApiErrorDTO": {
@@ -2441,6 +2660,50 @@
                         "maxLength": 80,
                         "minLength": 1,
                         "example": "Laravel"
+                    }
+                },
+                "type": "object"
+            },
+            "TestimonialRequest": {
+                "required": [
+                    "user_id",
+                    "name",
+                    "sex",
+                    "date",
+                    "testimonial",
+                    "status"
+                ],
+                "properties": {
+                    "user_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 2,
+                        "example": "Matheus"
+                    },
+                    "sex": {
+                        "$ref": "#/components/schemas/SexEnum"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-28"
+                    },
+                    "testimonial": {
+                        "type": "string",
+                        "minLength": 15,
+                        "example": "Foi um prazer trabalhar com o Felipe."
+                    },
+                    "original_url": {
+                        "type": "string",
+                        "format": "url",
+                        "maxLength": 512,
+                        "example": "https://www.linkedin.com/in/matheus/",
+                        "nullable": true
                     }
                 },
                 "type": "object"
@@ -2840,6 +3103,50 @@
                 },
                 "type": "object"
             },
+            "Testimonial": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Matheus"
+                    },
+                    "sex": {
+                        "$ref": "#/components/schemas/SexEnum"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-04-28"
+                    },
+                    "testimonial": {
+                        "type": "string",
+                        "example": "Foi um prazer trabalhar com o Felipe."
+                    },
+                    "original_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://www.linkedin.com/in/matheus/"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "properties": {
                     "id": {
@@ -2915,6 +3222,10 @@
         {
             "name": "Technology",
             "description": "Technology"
+        },
+        {
+            "name": "Testimonial",
+            "description": "Testimonial"
         },
         {
             "name": "User",
