@@ -2956,7 +2956,12 @@
                 "required": [
                     "name",
                     "email",
-                    "password"
+                    "password",
+                    "job_title",
+                    "phone_number",
+                    "birth_date",
+                    "locality",
+                    "about"
                 ],
                 "properties": {
                     "name": {
@@ -2977,6 +2982,41 @@
                         "maxLength": 255,
                         "minLength": 3,
                         "example": "admin"
+                    },
+                    "job_title": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "minLength": 2,
+                        "example": "Desenvolvedor fullstack"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "format": "url",
+                        "maxLength": 512,
+                        "example": "http://localhost:8000/images/avatar.png",
+                        "nullable": true
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "maxLength": 11,
+                        "minLength": 11,
+                        "example": "11983432682"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2003-08-15"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 2,
+                        "example": "São Paulo, SP"
+                    },
+                    "about": {
+                        "type": "string",
+                        "minLength": 15,
+                        "example": "<p>Olá! Eu sou o Felipe!</p>"
                     }
                 },
                 "type": "object"
@@ -3450,6 +3490,44 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-04-28T13:23:31.000000Z"
+                    },
+                    "job_title": {
+                        "type": "string",
+                        "example": "Desenvolvedor fullstack"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/images/avatar.png"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "11983432682"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2003-08-15"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "example": "São Paulo, SP"
+                    },
+                    "about": {
+                        "type": "string",
+                        "example": "<p>Olá! Eu sou o Felipe!</p>"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Link"
+                        }
+                    },
+                    "testimonials": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Testimonial"
+                        }
                     },
                     "created_at": {
                         "type": "string",

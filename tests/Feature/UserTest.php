@@ -23,6 +23,14 @@ class UserTest extends TestCase
                     'id',
                     'name',
                     'email',
+                    'job_title',
+                    'avatar_url',
+                    'phone_number',
+                    'birth_date',
+                    'locality',
+                    'about',
+                    'links',
+                    'testimonials',
                     'updated_at',
                     'created_at'
                 ]
@@ -42,6 +50,14 @@ class UserTest extends TestCase
                 'id',
                 'name',
                 'email',
+                'job_title',
+                'avatar_url',
+                'phone_number',
+                'birth_date',
+                'locality',
+                'about',
+                'links',
+                'testimonials',
                 'updated_at',
                 'created_at'
             ])
@@ -76,6 +92,12 @@ class UserTest extends TestCase
                 'id',
                 'name',
                 'email',
+                'job_title',
+                'avatar_url',
+                'phone_number',
+                'birth_date',
+                'locality',
+                'about',
                 'updated_at',
                 'created_at'
             ])

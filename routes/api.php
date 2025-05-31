@@ -28,6 +28,7 @@ Route::resource('project-type', ProjectTypeController::class)->only(['index', 's
 Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
 Route::resource('testimonial', TestimonialController::class)->only(['index', 'show']);
 Route::resource('link', LinkController::class)->only(['index', 'show']);
+Route::resource('user', UserController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -46,5 +47,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('technology', TechnologyController::class)->except(['index', 'show']);
     Route::apiResource('testimonial', TestimonialController::class)->except(['index', 'show']);
     Route::apiResource('link', LinkController::class)->except(['index', 'show']);
-    Route::apiResource('user', UserController::class)->except(['store']);
+    Route::apiResource('user', UserController::class)->except(['index', 'show', 'store']);
 });
