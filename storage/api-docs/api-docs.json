@@ -854,6 +854,216 @@
                 }
             }
         },
+        "/api/link": {
+            "get": {
+                "tags": [
+                    "Link"
+                ],
+                "summary": "List all links",
+                "operationId": "e94d4d79db47d99daadc7c3f650f6bab",
+                "responses": {
+                    "200": {
+                        "description": "Link list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Link"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Link"
+                ],
+                "summary": "Registers a link",
+                "operationId": "284bafba72de90d9d60cdaf30aa979bf",
+                "requestBody": {
+                    "description": "Data for creating a new link",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LinkRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Registered link data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Link"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/link/{id}": {
+            "get": {
+                "tags": [
+                    "Link"
+                ],
+                "summary": "List a link by ID",
+                "operationId": "28451ae2e824cece09436dc57aa8844f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Link ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Link data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Link"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Link"
+                ],
+                "summary": "Update a link",
+                "operationId": "b87369ed1d7816ebc41472b8916aed51",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Link ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Data for update link",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LinkRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated link data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Link"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Link"
+                ],
+                "summary": "Delete a link",
+                "operationId": "90bfbc96c17ccfddd14ee4e8ad5e8d5e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Link ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorDTO"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/project": {
             "get": {
                 "tags": [
@@ -2505,6 +2715,40 @@
                 },
                 "type": "object"
             },
+            "LinkRequest": {
+                "required": [
+                    "label",
+                    "url",
+                    "user_id"
+                ],
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "minLength": 2,
+                        "example": "LinkedIn"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "url",
+                        "maxLength": 512,
+                        "example": "https://www.linkedin.com/in/felipe-silva1508/"
+                    },
+                    "icon_name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "minLength": 2,
+                        "example": "pi-linkedin",
+                        "nullable": true
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "example": 1
+                    }
+                },
+                "type": "object"
+            },
             "ProjectTypeRequest": {
                 "required": [
                     "name"
@@ -2712,7 +2956,12 @@
                 "required": [
                     "name",
                     "email",
-                    "password"
+                    "password",
+                    "job_title",
+                    "phone_number",
+                    "birth_date",
+                    "locality",
+                    "about"
                 ],
                 "properties": {
                     "name": {
@@ -2733,6 +2982,41 @@
                         "maxLength": 255,
                         "minLength": 3,
                         "example": "admin"
+                    },
+                    "job_title": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "minLength": 2,
+                        "example": "Desenvolvedor fullstack"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "format": "url",
+                        "maxLength": 512,
+                        "example": "http://localhost:8000/images/avatar.png",
+                        "nullable": true
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "maxLength": 11,
+                        "minLength": 11,
+                        "example": "11983432682"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2003-08-15"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "maxLength": 120,
+                        "minLength": 2,
+                        "example": "São Paulo, SP"
+                    },
+                    "about": {
+                        "type": "string",
+                        "minLength": 15,
+                        "example": "<p>Olá! Eu sou o Felipe!</p>"
                     }
                 },
                 "type": "object"
@@ -2893,6 +3177,42 @@
                         "type": "string",
                         "format": "date",
                         "example": null
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-28T11:23:31.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "Link": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "label": {
+                        "type": "string",
+                        "example": "LinkedIn"
+                    },
+                    "url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "https://www.linkedin.com/in/felipe-silva1508/"
+                    },
+                    "icon_name": {
+                        "type": "string",
+                        "example": "pi-linkedin"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": 1
                     },
                     "created_at": {
                         "type": "string",
@@ -3171,6 +3491,44 @@
                         "format": "date-time",
                         "example": "2025-04-28T13:23:31.000000Z"
                     },
+                    "job_title": {
+                        "type": "string",
+                        "example": "Desenvolvedor fullstack"
+                    },
+                    "avatar_url": {
+                        "type": "string",
+                        "format": "url",
+                        "example": "http://localhost:8000/images/avatar.png"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "11983432682"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2003-08-15"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "example": "São Paulo, SP"
+                    },
+                    "about": {
+                        "type": "string",
+                        "example": "<p>Olá! Eu sou o Felipe!</p>"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Link"
+                        }
+                    },
+                    "testimonials": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Testimonial"
+                        }
+                    },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
@@ -3202,6 +3560,10 @@
         {
             "name": "Experience",
             "description": "Experience"
+        },
+        {
+            "name": "Link",
+            "description": "Link"
         },
         {
             "name": "Project",

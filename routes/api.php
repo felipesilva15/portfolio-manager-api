@@ -5,6 +5,7 @@ use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectTypeController;
 use App\Http\Controllers\SkillController;
@@ -26,6 +27,8 @@ Route::resource('skill', SkillController::class)->only(['index', 'show']);
 Route::resource('project-type', ProjectTypeController::class)->only(['index', 'show']);
 Route::resource('technology', TechnologyController::class)->only(['index', 'show']);
 Route::resource('testimonial', TestimonialController::class)->only(['index', 'show']);
+Route::resource('link', LinkController::class)->only(['index', 'show']);
+Route::resource('user', UserController::class)->only(['index', 'show']);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -43,5 +46,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::apiResource('project-type', ProjectTypeController::class)->except(['index', 'show']);
     Route::apiResource('technology', TechnologyController::class)->except(['index', 'show']);
     Route::apiResource('testimonial', TestimonialController::class)->except(['index', 'show']);
-    Route::apiResource('user', UserController::class)->except(['store']);
+    Route::apiResource('link', LinkController::class)->except(['index', 'show']);
+    Route::apiResource('user', UserController::class)->except(['index', 'show', 'store']);
 });
