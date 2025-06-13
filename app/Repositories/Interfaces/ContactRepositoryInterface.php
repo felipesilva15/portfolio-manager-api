@@ -12,4 +12,5 @@ interface ContactRepositoryInterface
     public function create(array $data): Contact;
     public function update(int $id, array $data): ?Contact;
     public function deleteById(int $id): bool;
+    public function getPendingContactByEmail(string $email);
 }

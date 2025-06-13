@@ -2749,20 +2749,6 @@
                 },
                 "type": "object"
             },
-            "ProjectTypeRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "maxLength": 40,
-                        "minLength": 1,
-                        "example": "Back-end"
-                    }
-                },
-                "type": "object"
-            },
             "ProjectRequest": {
                 "required": [
                     "title",
@@ -2854,6 +2840,20 @@
                             "type": "object"
                         },
                         "minItems": 1
+                    }
+                },
+                "type": "object"
+            },
+            "ProjectTypeRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "minLength": 1,
+                        "example": "Back-end"
                     }
                 },
                 "type": "object"

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Enums\ContactStatus;
 use App\Models\Contact;
 use App\Repositories\Interfaces\ContactRepositoryInterface;
 use Illuminate\Support\Collection;
@@ -41,5 +42,11 @@ class ContactRepository implements ContactRepositoryInterface {
         $contact->delete();
 
         return true;
+    }
+
+    public function getPendingContactByEmail(string $email): ?Contact {
+        return Contact::where('status', ContactStatus::Pending)
+                        ->where('email', $email)
+                        ->first();
     }
 }
