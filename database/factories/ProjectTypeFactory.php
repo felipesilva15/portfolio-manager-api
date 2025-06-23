@@ -17,7 +17,7 @@ class ProjectTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->jobTitle(),
+            'name' => substr(fake()->jobTitle(), 0, 40)
         ];
     }
 }
