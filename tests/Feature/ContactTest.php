@@ -145,4 +145,39 @@ class ContactTest extends TestCase
                         'message'
                     ]);
     }
+
+    public function test_cannot_create_duplicate_pending_contact(): void
+    {
+        $contact = Contact::factory()->createOne();
+        $data = $contact->toArray();
+
+        $response = $this->postJson('/api/contact/', $data, $this->getAuthHeaders());
+
+        $response->assertUnprocessable()
+                ->assertJsonIsObject()
+                ->assertJsonStructure([
+                    'path',
+                    'code',
+                    'message'
+                ]);
+    }
+
+    public function test_cannot_update_contact_duplicating_a_pending_contact(): void
+    {
+        $firstContact = Contact::factory()->createOne();
+        $secondContact = Contact::factory()->createOne();
+        
+        $secondContact->email = $firstContact->email;
+        $data = $secondContact->toArray();
+
+        $response = $this->putJson('/api/contact/'.$secondContact->id, $data, $this->getAuthHeaders());
+
+        $response->assertUnprocessable()
+                ->assertJsonIsObject()
+                ->assertJsonStructure([
+                    'path',
+                    'code',
+                    'message'
+                ]);
+    }
 }
