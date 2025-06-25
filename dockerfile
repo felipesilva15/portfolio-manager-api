@@ -2,7 +2,7 @@ FROM composer:2 AS vendor
 
 WORKDIR /app
 
-COPY composer.json composer.lock ./
+COPY composer.json ./
 RUN composer install --no-scripts --no-autoloader --prefer-dist
 
 COPY . ./
@@ -25,6 +25,8 @@ WORKDIR /var/www/html
 COPY docker/php.ini /usr/local/etc/php/conf.d/opcache.ini
 
 COPY . .
+
+COPY --from=vendor app/vendor /var/www/html/vendor
 
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
