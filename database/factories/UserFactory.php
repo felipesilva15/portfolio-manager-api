@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'job_title' => fake()->jobTitle(),
+            'job_title' => substr(fake()->jobTitle(), 0, 40),
             'avatar_url' => fake()->imageUrl(),
             'phone_number' => fake()->numerify('###########'),
             'birth_date' => fake()->date(),

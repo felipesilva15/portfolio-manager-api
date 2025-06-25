@@ -30,7 +30,7 @@ class ContactService {
     }
 
     public function create(array $data): Contact {
-        if ($this->existsPedingContact($data)) {
+        if ($this->existsPendingContact($data)) {
             throw new BussinessRuleException("Já existe um contato pendente com este e-mail.");
         }
 
@@ -38,7 +38,7 @@ class ContactService {
     }
 
     public function update(int $id, array $data): Contact {
-        if ($this->existsPedingContact($data, $id)) {
+        if ($this->existsPendingContact($data, $id)) {
             throw new BussinessRuleException("Já existe um contato pendente com este e-mail.");
         }
 
@@ -59,7 +59,7 @@ class ContactService {
         }
     }
 
-    public function existsPedingContact(array $contact, int $id = 0) {
+    public function existsPendingContact(array $contact, int $id = 0): bool {
         $pendingContact = $this->contactRepository->getPendingContactByEmail($contact['email']);
 
         if (!$pendingContact) {
