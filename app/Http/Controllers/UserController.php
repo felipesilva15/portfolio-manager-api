@@ -95,7 +95,8 @@ class UserController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function update(UserRequest $request, int $id): JsonResponse {
@@ -128,7 +129,8 @@ class UserController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(int $id): Response {

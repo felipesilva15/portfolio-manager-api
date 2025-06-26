@@ -83,7 +83,8 @@ class TagController
      *          response="401", 
      *          description="Unauthorized",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function store(TagRequest $request): JsonResponse {
@@ -122,7 +123,8 @@ class TagController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function update(int $id, TagRequest $request): JsonResponse {
@@ -155,7 +157,8 @@ class TagController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(int $id): Response {

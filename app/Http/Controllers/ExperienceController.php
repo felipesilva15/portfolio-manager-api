@@ -83,7 +83,8 @@ class ExperienceController
      *          response="401", 
      *          description="Unauthorized",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function store(ExperienceRequest $request): JsonResponse {
@@ -122,7 +123,8 @@ class ExperienceController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function update(int $id, ExperienceRequest $request): JsonResponse {
@@ -155,7 +157,8 @@ class ExperienceController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(int $id): Response {
