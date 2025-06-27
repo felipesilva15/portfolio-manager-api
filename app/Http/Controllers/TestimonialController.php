@@ -84,7 +84,8 @@ class TestimonialController extends Controller
      *          response="401", 
      *          description="Unauthorized",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function store(TestimonialRequest $request): JsonResponse {
@@ -123,7 +124,8 @@ class TestimonialController extends Controller
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function update(int $id, TestimonialRequest $request): JsonResponse {
@@ -156,7 +158,8 @@ class TestimonialController extends Controller
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(int $id): Response {

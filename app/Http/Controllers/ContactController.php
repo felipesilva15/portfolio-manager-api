@@ -83,7 +83,8 @@ class ContactController
      *          response="401", 
      *          description="Unauthorized",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function store(ContactRequest $request): JsonResponse {
@@ -122,7 +123,8 @@ class ContactController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function update(int $id, ContactRequest $request): JsonResponse {
@@ -155,7 +157,8 @@ class ContactController
      *          response="404", 
      *          description="Record not found",
      *          @OA\JsonContent(ref="#/components/schemas/ApiErrorDTO")
-     *      )
+     *      ),
+     *      security={{"bearerAuth":{}}}
      * )
      */
     public function destroy(int $id): Response {
