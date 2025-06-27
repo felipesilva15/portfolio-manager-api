@@ -69,7 +69,7 @@ class ProjectTypeTest extends TestCase
                 'updated_at',
                 'created_at'
             ])
-            ->assertJsonFragment(['name' => $projectType->name]);
+            ->assertJsonFragment(['name' => trim($projectType->name)]);
     }
 
     public function test_can_update_project_type(): void

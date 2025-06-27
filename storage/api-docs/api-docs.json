@@ -3897,14 +3897,6 @@
                 },
                 "type": "object"
             }
-        },
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "apiKey",
-                "description": "Insira o token JWT no formato: Bearer {token}",
-                "name": "Authorization",
-                "in": "header"
-            }
         }
     },
     "tags": [
